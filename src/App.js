@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route} from 'react-router-dom'
 import NewCar from './pages/NewCar';
+import Home from './pages/Home';
 
 
 
@@ -14,23 +15,21 @@ function App() {
     .then( res => res.json())
     .then( cars => setCars(cars))
   }, [])
+  
+  console.log(cars)
 
   const addCar = (car) => {
     setCars([...cars, car])
  }
 
   return (
-<<<<<<< HEAD
-    <div className="App"> 
+    <div className="App">
       <Routes>
+        <Route path='/' element = { <Home cars={cars} />} />
         <Route path="/newCar" element={<NewCar addCar = {addCar}/>}/>
       </Routes>
-     </div>
-=======
-    <div className="App">
       
     </div>
->>>>>>> fc605c0 (masi's updated code)
   );
 }
 
