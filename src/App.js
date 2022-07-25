@@ -20,11 +20,17 @@ function App() {
  }
 
   return (
+<<<<<<< HEAD
     <div className="App"> 
       <Routes>
         <Route path="/newCar" element={<NewCar addCar = {addCar}/>}/>
       </Routes>
      </div>
+=======
+    <div className="App">
+      
+    </div>
+>>>>>>> fc605c0 (masi's updated code)
   );
 }
 
