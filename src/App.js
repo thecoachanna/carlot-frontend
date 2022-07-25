@@ -2,6 +2,8 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route} from 'react-router-dom'
 import NewCar from './pages/NewCar';
+import ShowCar from './pages/ShowCar';
+import Main from './pages/Main';
 
 
 
@@ -22,7 +24,9 @@ function App() {
   return (
     <div className="App"> 
       <Routes>
-        <Route path="/newCar" element={<NewCar addCar = {addCar}/>}/>
+        <Route path='/' element={ <Main car={cars} /> } />
+        <Route path="/newCar" element={ <NewCar addCar={addCar} />} />
+        <Route path='/cars/:id' element={ <ShowCar car={cars} />} />
       </Routes>
      </div>
   );
