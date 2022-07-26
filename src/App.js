@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route} from 'react-router-dom'
 import NewCar from './pages/NewCar';
 import Home from './pages/Home';
+import ShowCar from './pages/ShowCar';
 
 
 
@@ -26,9 +27,9 @@ function App() {
     <div className="App">
       <Routes>
 
-        <Route path='/' element={<Main car={cars} />} />
-        <Route path="/newCar" element={<NewCar addCar={addCar} />} />
-        <Route path='/cars/:id' element={<ShowCar car={cars} />} />
+        <Route path='/' element={<Home cars={cars} />} />
+        <Route path='/newCar' element={<NewCar addCar={addCar} />} />
+        <Route path='/cars/:id' element={<ShowCar cars={cars} />} />
       </Routes>
     </div>
   );

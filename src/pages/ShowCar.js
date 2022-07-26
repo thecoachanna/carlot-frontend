@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-
+import React from 'react'
+import { useParams } from 'react-router-dom';
 
 
 const ShowCar = ({ cars }) => {
-    
-    const { id } = useParams()
 
-    const [showCar, setShowCar] = useState()
-    useEffect(() => {
-        fetch(`http://localhost:4000/cars/${id}`)
-            .then(res => res.json())
-            .then(data => setShowCar(data))
-    }, [])
-
-    console.log(showCar)
-
+  let { id } = useParams()
+  
+  let car = cars.find(c => c._id === id)
+ 
   return (
-    <div>Show Car</div>
+    <div>
+      <a href="/">Back</a>
+      <h1>Car Details</h1>
+      <h2>{car.title}</h2>
+      <h2>${car.price}</h2>
+      <img src={car.image} alt={car.name} />
+    </div>
   )
 }
 
