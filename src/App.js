@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route} from 'react-router-dom'
 import ShowCar from './pages/ShowCar'
 import NewCar from './pages/NewCar';
+import ShowCar from './pages/ShowCar';
 import Home from './pages/Home';
 import Navbar from './components/Navbar'
 import Login from './pages/Login';
@@ -30,7 +31,7 @@ function App() {
     <div className="App">
       <Navbar user={user}/>
       <Routes>
-        <Route path='/' element = { <Home cars={cars} setCars={setCars} />} />
+        <Route path='/' element={ <Home car={cars} /> } />
         <Route path="/newCar" element={ <NewCar addCar={addCar} />} />
         <Route path='/cars/:id' element={ <ShowCar cars={cars} />} />
         <Route path='/login' element={<Login setUser={setUser}/>}/>
