@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link, useNavigate} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
 const NavbarContainer = styled.nav`
     background-color: #c0ffee;
@@ -14,12 +14,11 @@ const NavbarContainer = styled.nav`
     li {
         list-style: none;
     }
-
     
 `
 
 const Navbar = ({user, setUser}) => {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
   return (
     <NavbarContainer>
