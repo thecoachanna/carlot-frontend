@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import {useState} from 'react'
 // import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -22,12 +22,11 @@ const Review = ({ownerId}) => {
         
        }
 
-const navigate = useNavigate()
+// const navigate = useNavigate()
 
 const [formData, setFormData] = useState(initialState)
   
 const handleChange = (e) => {
-        // console.log(e.target)
         setFormData({text : e.target.value})
     }
   
@@ -56,6 +55,6 @@ const handleSubmit = (e) => {
     </div>
   )
 }
-// }
+
 
 export default Review
