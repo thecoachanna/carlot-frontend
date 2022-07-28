@@ -10,11 +10,7 @@ const ShowCar = ({ cars }) => {
   
   let car = cars.find(c => c._id === id)
 
-  const [reviews,setReviews] = useState([])
-
-  const addReview = (review) => {
-    setReviews([...reviews, review])
- }
+  
  
   return (
     <div>
@@ -26,7 +22,7 @@ const ShowCar = ({ cars }) => {
       <br/>
       {/* {reviews.length===0 ? 'No Reviews for this Seller' : (reviews.map((review) => { return <Review review={review} addReview={addReview}/>}) ) } */}
 
-      <Review reviews={reviews} addReview={addReview} />
+      <Review  ownerId = {car.owner}/>
       
     </div>
   )
