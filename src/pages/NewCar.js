@@ -6,16 +6,19 @@ import { useNavigate } from 'react-router-dom'
 const NewCar = ({addCar}) => {
 
     const initialState = {
+    make:'',
+    model:'',
+    year: '',
     image: '',
     price: '',
     title: '',
     location: '',
-    year: '',
     mileage: '',
     transmission: '',
     color: '',
     notes: '',
     ownerInfo: '',
+
    }
 
 const navigate = useNavigate()
@@ -41,10 +44,22 @@ const handleSubmit = (e) => {
     return (
     
     <form onSubmit={handleSubmit}>
-        <h1>Create New Post</h1>
+        <h1>New Listing</h1>
         <div>
             <label htmlFor='image'>Image</label>
             <input id='image' name='image' type='text'   onChange={handleChange} />
+        </div>
+        <div>
+            <label htmlFor='make'>Make</label>
+            <input id='make' name='make' type='text' onChange={handleChange} />
+        </div>
+        <div>
+            <label htmlFor='model'>Model</label>
+            <input id='model' name='model' type='text' onChange={handleChange} />
+        </div>
+        <div>
+            <label htmlFor='year'>Year</label>
+            <input id='year' name='year' type='text' onChange={handleChange} />
         </div>
         <div>
             <label htmlFor='price'>Price</label>
@@ -53,14 +68,6 @@ const handleSubmit = (e) => {
         <div>
             <label htmlFor='title'>Title</label>
             <input id='title' name='title' type='text' onChange={handleChange} />
-        </div>
-        <div>
-            <label htmlFor='location'>Location</label>
-            <input id='location' name='location' type='text' onChange={handleChange} />
-        </div>
-        <div>
-            <label htmlFor='year'>Year</label>
-            <input id='year' name='year' type='text' onChange={handleChange} />
         </div>
         <div>
             <label htmlFor='mileage'>Mileage</label>
@@ -73,6 +80,10 @@ const handleSubmit = (e) => {
         <div>
             <label htmlFor='color'>Color</label>
             <input id='color' name='color' type='text' onChange={handleChange} />
+        </div>
+        <div>
+            <label htmlFor='location'>Location</label>
+            <input id='location' name='location' type='text' onChange={handleChange} />
         </div>
         <div>
             <label htmlFor='notes'>Notes</label>
