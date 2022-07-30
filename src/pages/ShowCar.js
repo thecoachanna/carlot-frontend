@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import Review from '../components/Review';
 import CarMap from '../components/CarMap';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 
 const ShowCar = ({ cars }) => {
@@ -11,11 +11,6 @@ const ShowCar = ({ cars }) => {
   
   let car = cars.find(c => c._id === id)
 
-  const [reviews,setReviews] = useState([])
-
-  const addReview = (review) => {
-    setReviews([...reviews, review])
- }
  
   return (
     <div>
