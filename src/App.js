@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Routes, Route} from 'react-router-dom'
 import ShowCar from './pages/ShowCar'
 import NewCar from './pages/NewCar';
-import ShowCar from './pages/ShowCar';
 import Home from './pages/Home';
 import Navbar from './components/Navbar'
 import Login from './pages/Login';
