@@ -14,8 +14,9 @@ const Review = ({ownerId}) => {
     
     const addReview = (review) => {
         setReviews([...reviews, review])
-
+        
     }
+
         const initialState = {
         text: ''
        
