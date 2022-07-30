@@ -30,7 +30,7 @@ function App() {
     <div className="App">
       <Navbar user={user}/>
       <Routes>
-        <Route path='/' element={ <Home car={cars} /> } />
+        <Route path='/' element = { <Home cars={cars} setCars={setCars} />} />
         <Route path="/newCar" element={ <NewCar addCar={addCar} />} />
         <Route path='/cars/:id' element={ <ShowCar cars={cars} />} />
         <Route path='/login' element={<Login setUser={setUser}/>}/>
