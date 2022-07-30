@@ -13,7 +13,7 @@ const Review = ({ownerId}) => {
     const [reviews, setReviews] = useState([])
     
     const addReview = (review) => {
-        setReviews([...reviews, review)]
+        setReviews([...reviews, review])
         
     }
 
