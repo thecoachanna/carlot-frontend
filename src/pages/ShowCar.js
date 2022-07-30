@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import Review from '../components/Review';
 import CarMap from '../components/CarMap';
+import { useState } from 'react';
 
 
 const ShowCar = ({ cars }) => {
@@ -10,12 +11,17 @@ const ShowCar = ({ cars }) => {
   
   let car = cars.find(c => c._id === id)
 
-  
+  const [reviews,setReviews] = useState([])
+
+  const addReview = (review) => {
+    setReviews([...reviews, review])
+ }
+ 
   return (
     <div>
       <a href="/">Back</a>
       <h1>Car Details</h1>
-      <h2>{car.title}</h2>
+      <h2>{car.make}</h2>
       <h2>${car.price}</h2>
       <img src={car.image} alt={car.name} /> 
       <br/>
@@ -30,4 +36,4 @@ const ShowCar = ({ cars }) => {
   )
 }
 
-export default ShowCar
+export default ShowCar 

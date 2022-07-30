@@ -6,10 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const NewCar = ({addCar}) => {
 
     const initialState = {
-    make:'',
-    model:'',
-    year: '',
-    image: '',
+    
     price: '',
     title: '',
     location: '',
@@ -18,7 +15,7 @@ const NewCar = ({addCar}) => {
     color: '',
     notes: '',
     ownerInfo: '',
-
+    photo: '',
    }
 
 const navigate = useNavigate()
@@ -28,7 +25,12 @@ const [formData, setFormData] = useState(initialState)
 const handleChange = (e) => {
         console.log(e.target)
         setFormData({...formData, [e.target.id] : e.target.value})
-    }
+}
+    
+const handlePhoto = (e) => {
+    setFormData({ ...formData, photo: e.target.files[0] })
+    console.log(formData.photo)
+}
   
 const handleSubmit = (e) => {
         e.preventDefault()
@@ -43,51 +45,44 @@ const handleSubmit = (e) => {
 
     return (
     
-    <form onSubmit={handleSubmit}>
-        <h1>New Listing</h1>
+    <form onSubmit={handleSubmit} encType='multipart/form-data'>
+        <h1>Create New Post</h1>
+        
         <div>
-            <label htmlFor='image'>Image</label>
-            <input id='image' name='image' type='text'   onChange={handleChange} />
-        </div>
-        <div>
-            <label htmlFor='make'>Make</label>
-            <input id='make' name='make' type='text' onChange={handleChange} />
-        </div>
-        <div>
-            <label htmlFor='model'>Model</label>
-            <input id='model' name='model' type='text' onChange={handleChange} />
-        </div>
-        <div>
-            <label htmlFor='year'>Year</label>
-            <input id='year' name='year' type='text' onChange={handleChange} />
-        </div>
-        <div>
-            <label htmlFor='price'>Price</label>
+            <label htmlFor='price'>Price </label>
             <input id='price' name='price' type='text' onChange={handleChange} />
         </div>
         <div>
-            <label htmlFor='title'>Title</label>
+            <label htmlFor='title'>Title </label>
             <input id='title' name='title' type='text' onChange={handleChange} />
         </div>
         <div>
-            <label htmlFor='mileage'>Mileage</label>
-            <input id='mileage' name='mileage' type='text' onChange={handleChange} />
-        </div>
-        <div>
-            <label htmlFor='transmission'>Transmission</label>
-            <input id='transmission' name='transmission' type='text' onChange={handleChange} />
-        </div>
-        <div>
-            <label htmlFor='color'>Color</label>
-            <input id='color' name='color' type='text' onChange={handleChange} />
-        </div>
-        <div>
-            <label htmlFor='location'>Location</label>
+            <label htmlFor='location'>Location </label>
             <input id='location' name='location' type='text' onChange={handleChange} />
         </div>
         <div>
-            <label htmlFor='notes'>Notes</label>
+            <label htmlFor='year'>Year </label>
+            <input id='year' name='year' type='text' onChange={handleChange} />
+        </div>
+        <div>
+            <label htmlFor='mileage'>Mileage </label>
+            <input id='mileage' name='mileage' type='text' onChange={handleChange} />
+        </div>
+        <div>
+            <label htmlFor='transmission'>Transmission </label>
+            <input id='transmission' name='transmission' type='text' onChange={handleChange} />
+        </div>
+        <div>
+            <label htmlFor='color'>Color </label>
+            <input id='color' name='color' type='text' onChange={handleChange} />
+        </div>
+        <div>
+            <label htmlFor='notes'>Notes </label>
             <input id='notes' name='notes' type='text' onChange={handleChange} />
+            </div>
+        <div>
+            <label htmlFor='file'>Photo </label>
+            <input id='photo' name='photo' type='file' accept='.png, .jpg, .jpeg' onChange={handlePhoto} />
         </div>
 
         <input type='submit' value='Post Car' />
