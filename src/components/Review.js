@@ -8,18 +8,18 @@ import axios from 'axios';
 
 const Review = ({ownerId}) => {
 
-    // let { id } = useParams()
-    const [reviews,setReviews] = useState([])
-
+//     let { id } = useParams()
+    
+    const [reviews, setReviews] = useState([])
+    
     const addReview = (review) => {
-      setReviews([...reviews, review])
-  }
-
-   
+        setReviews([...reviews, review)]
+        
+    }
 
         const initialState = {
         text: ''
-        
+       
        }
 
 // const navigate = useNavigate()
