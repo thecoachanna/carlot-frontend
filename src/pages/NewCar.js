@@ -10,7 +10,6 @@ const NewCar = ({addCar}) => {
     price: '',
     title: '',
     location: '',
-    year: '',
     mileage: '',
     transmission: '',
     color: '',
