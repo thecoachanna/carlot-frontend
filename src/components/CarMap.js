@@ -1,4 +1,4 @@
-/* import React from 'react'
+import React from 'react'
 import { GoogleMap, withScriptjs, withGoogleMap } from "react-google-maps" 
 
 
@@ -10,4 +10,4 @@ const CarMap = withScriptjs(withGoogleMap(() => {
   )
 }))
 
-export default CarMap */
+export default CarMap
