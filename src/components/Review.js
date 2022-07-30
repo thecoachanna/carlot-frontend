@@ -1,43 +1,39 @@
 import React from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {useState} from 'react'
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
 
-const Review = ({ownerId}) => {
+const Review = ({addReview, reviews}) => {
 
-    // let { id } = useParams()
-    const [reviews,setReviews] = useState([])
+    let { id } = useParams()
 
-    const addReview = (review) => {
-      setReviews([...reviews, review])
-  }
-
-   
+    // const Review = () => {
 
         const initialState = {
-        text: ''
-        
+        text: '',
+        reviewer: ''
        }
 
-// const navigate = useNavigate()
+const navigate = useNavigate()
 
 const [formData, setFormData] = useState(initialState)
   
 const handleChange = (e) => {
-        setFormData({text : e.target.value})
+        console.log(e.target)
+        setFormData({...formData, [e.target.id] : e.target.value})
     }
   
 const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
-        axios.post(`http://localhost:4000/users/${ownerId}/reviews`, formData )
+        axios.post(`http://localhost:4000/cars/${id}`, formData )
         .then(res =>  {
             setFormData(initialState)
-            addReview(res.data.text)
-            
+            addReview(res.data)
+            navigate('/cars/:id', { replace: true })
         })
 }
 
@@ -51,10 +47,10 @@ const handleSubmit = (e) => {
     </div>
         <input type='submit' value='Post Review' />
     </form>
-    {reviews.length === 0 ? 'No Reviews for this Seller' : (reviews.map((review) => { return <p>{review}</p>}))}
+    {reviews.length===0 ? 'No Reviews for this Seller' : (reviews.map((review) => { return review}))}
     </div>
   )
 }
-
+// }
 
 export default Review
