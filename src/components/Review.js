@@ -1,6 +1,7 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 // import { useNavigate } from 'react-router-dom'
-import {useState} from 'react'
+import {useState , useEffect } from 'react'
 // import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,6 +10,17 @@ import axios from 'axios';
 const Review = ({ownerId}) => {
 
 //     let { id } = useParams()
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/users/${ownerId}/reviews`)
+        // console.log(res.data)
+        .then(res => {
+        setReviews(res.data)
+        })
+    },[])
+
+
+
     
     const [reviews, setReviews] = useState([])
     
