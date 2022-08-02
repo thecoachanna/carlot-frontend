@@ -5,7 +5,8 @@ import ShowCar from './pages/ShowCar'
 import NewCar from './pages/NewCar';
 import Home from './pages/Home';
 import Navbar from './components/Navbar'
-import Login from './pages/Login';
+import Login from './pages/LoginPage/Login';
+import {getToken} from './utils/tokenServices'
 
 
 
@@ -15,7 +16,9 @@ function App() {
   const [user, setUser] = useState()
 
   useEffect(() => {
-    fetch('http://localhost:4000/cars/')
+    fetch('http://localhost:4000/cars/',{
+      headers :new Headers({'Authorization':'Bearer' + getToken()})
+    })
     .then( res => res.json())
     .then( cars => setCars(cars))
   }, [])
