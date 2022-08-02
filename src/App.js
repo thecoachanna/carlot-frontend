@@ -6,6 +6,7 @@ import NewCar from './pages/NewCar';
 import Home from './pages/Home';
 import Navbar from './components/Navbar'
 import Login from './pages/LoginPage/Login';
+import Signup from './pages/SignupPage/Signup'
 import {getToken} from './utils/tokenServices'
 
 
@@ -17,7 +18,7 @@ function App() {
 
   useEffect(() => {
     fetch('http://localhost:4000/cars/',{
-      headers :new Headers({'Authorization':'Bearer' + getToken()})
+      headers :new Headers({'Authorization':'Bearer ' + getToken()})
     })
     .then( res => res.json())
     .then( cars => setCars(cars))
@@ -37,6 +38,7 @@ function App() {
         <Route path="/newCar" element={ <NewCar addCar={addCar} />} />
         <Route path='/cars/:id' element={ <ShowCar cars={cars} />} />
         <Route path='/login' element={<Login setUser={setUser}/>}/>
+        <Route path='/signup' element={<Signup setUser={setUser}/>}/>
       </Routes>
       
     </div>

@@ -1,15 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 // import styled from 'styled-components'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import './login.css'
-import {setToken} from '../../utils/tokenServices'
+import './Login.css'
+import {setToken,getUserFromPayload,getToken} from '../../utils/tokenServices'
+
 
 
 
 const Login = ({setUser}) => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState()
+    const [errorMsg,setErrorMsg] = useState({})
+
+    useEffect(() => {
+        if (getToken()) navigate('/')
+    }, [])
 
     const handleChange =(e) => {
         setFormData({...formData, [e.target.id] :e.target.value})
@@ -22,16 +28,29 @@ const Login = ({setUser}) => {
             if(res.status === 200){
                 console.log(res.data.access)
                 setToken(res.data.access)
-                
-                // setUser(res.data)
-                // navigate('/')
+                setUser(getUserFromPayload())
+                navigate('/')
             }
+        }).catch(err=>{
+            // console.log(err)
+            const res = err.response
+            if(res.status === 400){
+                console.log(res.data)
+                setErrorMsg(res.data)
+            }
+
         })
 }
 
   return (
     <form onSubmit={handleSubmit} className='form'>
         <h1>Login</h1>
+
+        {Object.entries(errorMsg).map((keyName,keyIndex) =>{
+            return <span className='error'>{keyName}:{errorMsg[keyName]}</span>
+        })}
+        
+
         <div>
             <label htmlFor='email'>Email</label>
             <input type='text' name='email' id="email" onChange={handleChange}/>
