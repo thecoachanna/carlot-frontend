@@ -33,8 +33,7 @@ const Navbar = ({user, setUser}) => {
         <ul>
             <li> <Link to='/'> Home </Link></li>
             <li> <Link to='/newcar'> New Listing</Link></li>
-            <li> <Link to='/Welcome'> Welcome</Link></li>
-            <li> <Link to='/user'> User</Link></li>
+            <li> <Link to='/Signup'> Signup</Link></li>
             <li><a href='#' onClick={logout}>Logout</a></li>
         </ul>
     </NavbarContainer>
