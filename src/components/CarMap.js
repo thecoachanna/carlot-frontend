@@ -5,21 +5,17 @@ import { GoogleMap , withScriptjs, withGoogleMap, Marker } from "react-google-ma
 import Geocode from 'react-geocode'
 
 
-
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_KEY);
 Geocode.setLanguage('en');
 
 const CarMap = withScriptjs(withGoogleMap( ({carLocation}) => {
 
- 
-
-  const [coordinates, setCoordinates] = useState({
+ const [coordinates, setCoordinates] = useState({
     lat: null,
     lng: null
   })
-
   
-  useEffect (() =>{
+useEffect (() =>{
   Geocode.fromAddress(carLocation).then(
     (response) => {
       const mapCenter = response.results[0].geometry.location;
@@ -33,17 +29,13 @@ const CarMap = withScriptjs(withGoogleMap( ({carLocation}) => {
 }, []);
 
 
-  return (
-    
-    <div> 
+return (
+  <div> 
     {coordinates?.lat && <GoogleMap defaultZoom={8} defaultCenter={{lat: parseInt(coordinates.lat), lng: parseInt(coordinates.lng)}}>
     <Marker position={{lat: parseInt(coordinates.lat), lng: parseInt(coordinates.lng)}}/>
-  </GoogleMap>}
-    </div>
+    </GoogleMap>}
+  </div>
   )
 }))
-
-// withScriptjs, withGoogleMap 
-// const CarMap = withScriptjs(withGoogleMap(() => {
 
 export default CarMap

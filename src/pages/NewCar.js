@@ -1,13 +1,26 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { Autocomplete } from '@react-google-maps/api'
+// import { Autocomplete } from '@react-google-maps/api'
+import PlacesAutocomplete from 'react-places-autocomplete'
+// Run: npm install --save react-async-script-loader --legacy-peer-deps
+
+
 
 
 const NewCar = ({addCar}) => {
 
-    const initialState = {
+const [address, setAddress] = useState('')
+
+const handleInput = (value) => {
+    setAddress(value);
+}
+
+const handleSelect = (value) => {
+    setAddress(value)
+}
     
+    const initialState = {    
     price: '',
     title: '',
     location: '',
@@ -22,16 +35,18 @@ const NewCar = ({addCar}) => {
 const navigate = useNavigate()
 
 const [formData, setFormData] = useState(initialState)
+
   
 const handleChange = (e) => {
         console.log(e.target)
-        setFormData({...formData, [e.target.id] : e.target.value})
+        setFormData({...formData, [e.target.id] : e.target.value, location: address})
 }
     
 const handlePhoto = (e) => {
     setFormData({ ...formData, photo: e.target.files[0] })
     console.log(formData.photo)
 }
+
   
 const handleSubmit = (e) => {
         e.preventDefault()
@@ -56,14 +71,30 @@ const handleSubmit = (e) => {
         <div>
             <label htmlFor='title'>Title </label>
             <input id='title' name='title' type='text' onChange={handleChange} />
-        </div>
-        {/* <div>
-            <label htmlFor='location'>Location </label>
-            <input id='location' name='location' type='text' onChange={handleChange} />
-        </div> */}
-        {/* <Autocomplete> */}
-            {/* <input id='location' name='location' type='text' onChange={handleChange} /> */}
-        {/* </Autocomplete> */}
+        </div>    
+        <PlacesAutocomplete value={address} onChange={handleInput} onSelect={handleSelect} id="location" name="location">
+            {({ getInputProps, suggestions, getSuggestionItemProps}) => (
+                <div>
+                    <label htmlFor='location'>Location</label>
+                    <input {...getInputProps({placeholder: 'Enter Car Location ...'})} />
+                <div>
+              {suggestions.map((suggestion) => {
+                const style = suggestion.active ?
+                {backgroundColor: "#ECF0F1", cursor: "pointer"} :
+                {backgroundColor: "#FFFFFF", cursor: "pointer"};
+
+                return (
+                    <div
+                      {...getSuggestionItemProps(suggestion, { style})}>
+                      {suggestion.description}
+                    </div>
+                  );
+              })}
+              </div>
+                </div>
+            )}
+        </PlacesAutocomplete>
+
         <div>
             <label htmlFor='year'>Year </label>
             <input id='year' name='year' type='text' onChange={handleChange} />
