@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { Autocomplete } from '@react-google-maps/api'
 
 
 const NewCar = ({addCar}) => {
@@ -39,7 +40,7 @@ const handleSubmit = (e) => {
         .then(res =>  {
             setFormData(initialState)
             addCar(res.data)
-            navigate('/', { replace: true })
+            navigate('/cars', { replace: true })
         })
 }
 
@@ -56,10 +57,13 @@ const handleSubmit = (e) => {
             <label htmlFor='title'>Title </label>
             <input id='title' name='title' type='text' onChange={handleChange} />
         </div>
-        <div>
+        {/* <div>
             <label htmlFor='location'>Location </label>
             <input id='location' name='location' type='text' onChange={handleChange} />
-        </div>
+        </div> */}
+        {/* <Autocomplete> */}
+            {/* <input id='location' name='location' type='text' onChange={handleChange} /> */}
+        {/* </Autocomplete> */}
         <div>
             <label htmlFor='year'>Year </label>
             <input id='year' name='year' type='text' onChange={handleChange} />
@@ -79,7 +83,8 @@ const handleSubmit = (e) => {
         <div>
             <label htmlFor='notes'>Notes </label>
             <input id='notes' name='notes' type='text' onChange={handleChange} />
-            </div>
+        </div>
+        
         <div>
             <label htmlFor='file'>Photo </label>
             <input id='photo' name='photo' type='file' accept='.png, .jpg, .jpeg' onChange={handlePhoto} />

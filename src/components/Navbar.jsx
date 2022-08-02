@@ -23,8 +23,8 @@ const Navbar = ({user, setUser}) => {
   return (
     <NavbarContainer>
         <ul>
-            <li> <Link to='/'> Home </Link></li>
-            <li> <Link to='/newcar'> New Listing</Link></li>
+            <li> <Link to='/cars'> Home </Link></li>
+            <li> <Link to='/cars/new'> New Listing</Link></li>
             <li> <Link to='/Welcome'> Welcome</Link></li>
             <li> <Link to='/user'> User</Link></li>
             <li> <Link to='/logout'> Logout</Link></li>

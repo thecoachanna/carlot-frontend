@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 const Car = ({ car }) => {
+
   return (
     <div>
       <img src={car.image} alt={car.model} />   
