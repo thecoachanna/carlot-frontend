@@ -19,6 +19,7 @@ const NewCar = ({ addCar }) => {
     photo: "",
   };
 
+ 
 
    const navigate = useNavigate()
 
@@ -38,17 +39,6 @@ const handlePhoto = (e) => {
     console.log(formData.photo)
 }
   
-const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(formData)
-        setAuthToken()
-        axios.post('http://localhost:4000/cars', formData )
-        .then(res =>  {
-            setFormData(initialState)
-            addCar(res.data)
-            navigate('/', { replace: true })
-        })
-}
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -62,6 +52,18 @@ const handleSubmit = (e) => {
   //       navigate("/", { replace: true });
   //     });
   // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    const headers = { Authorization: "Bearer " + getToken() };
+    axios
+      .post("http://localhost:4000/cars", formData, { headers })
+      .then((res) => {
+        setFormData(initialState);
+        addCar(res.data);
+        navigate("/", { replace: true });
+      });
+  };
 
   return (
     <body className="NewCar">
