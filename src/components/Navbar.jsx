@@ -42,7 +42,6 @@ const Navbar = ({ setUser}) => {
             { user && <li><span>Welcome {getName()}</span></li> }
             <li> <Link to='/'> Home </Link></li>
             <li> <Link to='/newcar'> New Listing</Link></li>
-
             <li><Link to='/Welcome'></Link></li>
 
     
@@ -52,9 +51,6 @@ const Navbar = ({ setUser}) => {
                 : 
                 <li> <Link to='/login'>Login</Link></li>
             }
-
-            
-
         </ul>
     </NavbarContainer>
   )
