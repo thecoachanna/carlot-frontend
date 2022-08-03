@@ -1,21 +1,16 @@
-import React, {useState, useEffect} from 'react'
-// import styled from 'styled-components'
+import React,{useState} from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import './login.css'
-import {setToken,getUserFromPayload,getToken} from '../../utils/tokenServices'
-
-
+import {setToken,getUserFromPayload} from '../../utils/tokenServices'
+import { useNavigate,Link } from 'react-router-dom'
+import './Login.css'
 
 
 const Login = ({setUser}) => {
     const navigate = useNavigate()
+
+
     const [formData, setFormData] = useState()
     const [errorMsg,setErrorMsg] = useState({})
-
-    useEffect(() => {
-        if (getToken()) navigate('/')
-    }, [])
 
     const handleChange =(e) => {
         setFormData({...formData, [e.target.id] :e.target.value})
@@ -42,6 +37,8 @@ const Login = ({setUser}) => {
         })
 }
 
+
+
   return (
     <form onSubmit={handleSubmit} className='form'>
         <h1>Login</h1>
@@ -59,6 +56,9 @@ const Login = ({setUser}) => {
             <label htmlFor='password'>Password</label>
             <input type='password' name='password' id="password" onChange={handleChange}/>
         </div>
+        
+        <span>dont have an account? <Link to='/signup'>create one</Link></span>
+
         <input type='submit' value="Log In" />
 
     </form>

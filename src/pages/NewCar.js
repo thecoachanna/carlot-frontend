@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { getToken } from "../utils/tokenServices";
 import "./NewCar.css";
 
+
+
+import setAuthToken from '../utils/axios'
+
 const NewCar = ({ addCar }) => {
   const initialState = {
     make: "",
@@ -21,30 +25,44 @@ const NewCar = ({ addCar }) => {
 
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState(initialState);
+ 
 
-  const handleChange = (e) => {
-    console.log(e.target);
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
+const [formData, setFormData] = useState(initialState)
+  
+const handleChange = (e) => {
+        console.log(e.target)
+        setFormData({...formData, [e.target.id] : e.target.value})
+}
+    
+const handlePhoto = (e) => {
+    setFormData({ ...formData, photo: e.target.files[0] })
+    console.log(formData.photo)
+}
+  
+const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(formData)
+        setAuthToken()
+        axios.post('http://localhost:4000/cars', formData )
+        .then(res =>  {
+            setFormData(initialState)
+            addCar(res.data)
+            navigate('/', { replace: true })
+        })
+}
 
-  const handlePhoto = (e) => {
-    setFormData({ ...formData, photo: e.target.files[0] });
-    console.log(formData.photo);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    const headers = { Authorization: "Bearer " + getToken() };
-    axios
-      .post("http://localhost:4000/cars", formData, { headers })
-      .then((res) => {
-        setFormData(initialState);
-        addCar(res.data);
-        navigate("/", { replace: true });
-      });
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(formData);
+  //   const headers = { Authorization: "Bearer " + getToken() };
+  //   axios
+  //     .post("http://localhost:4000/cars", formData, { headers })
+  //     .then((res) => {
+  //       setFormData(initialState);
+  //       addCar(res.data);
+  //       navigate("/", { replace: true });
+  //     });
+  // };
 
   return (
     <body className="NewCar">
