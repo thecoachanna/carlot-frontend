@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import {useState , useEffect } from 'react'
 // import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { getToken } from '../utils/tokenServices';
+import setAuthToken from '../utils/axios';
 
 
 
@@ -13,8 +13,8 @@ const Review = ({ownerId}) => {
 //     let { id } = useParams()
 
     useEffect(() => {
-        const headers = {'Authorization': 'Bearer ' + getToken()}
-        axios.get(`http://localhost:4000/users/${ownerId}/reviews`,{headers})
+        setAuthToken()
+        axios.get(`http://localhost:4000/users/${ownerId}/reviews`)
         // console.log(res.data)
         .then(res => {
         setReviews(res.data)
@@ -47,8 +47,8 @@ const handleChange = (e) => {
 const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
-        const headers = {'Authorization': 'Bearer ' + getToken()}
-        axios.post(`http://localhost:4000/users/${ownerId}/reviews`, formData,{headers} )
+        setAuthToken()
+        axios.post(`http://localhost:4000/users/${ownerId}/reviews`, formData )
         .then(res =>  {
             setFormData(initialState)
             addReview(res.data.text)
