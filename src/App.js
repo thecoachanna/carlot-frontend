@@ -1,13 +1,13 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route} from 'react-router-dom'
 import ShowCar from './pages/ShowCar'
 import NewCar from './pages/NewCar';
 import Home from './pages/Home';
 import Navbar from './components/Navbar'
 import Auth from './pages/AuthPage/Auth';
-import axios from 'axios';
-import setAuthToken from './utils/axios'
+
+
 
 
 
@@ -16,14 +16,7 @@ function App() {
   const [ cars, setCars  ] = useState([])
   const [user, setUser] = useState()
 
-  useEffect(() => {
-
-    setAuthToken()
-    axios.get('http://localhost:4000/cars/').
-    then((res) => setCars(res.data))
-
-  }, [])
-
+  
  
   
   console.log(cars)

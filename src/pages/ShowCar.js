@@ -1,11 +1,18 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
+import React ,{useEffect} from 'react'
+import { useParams ,useNavigate} from 'react-router-dom';
 import Review from '../components/Review';
 import CarMap from '../components/CarMap';
-// import { useState } from 'react';
+import { getToken } from '../utils/tokenServices';
+
 
 
 const ShowCar = ({ cars }) => {
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!getToken()) navigate('/login')
+  }, [])
 
   let { id } = useParams()
   
