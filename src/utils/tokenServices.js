@@ -1,3 +1,5 @@
+
+
 function setToken(token){
     if(token){
         localStorage.setItem('token',token)
@@ -29,8 +31,11 @@ function getUserFromPayload() {
     return null
 }
 
+
+
 module.exports = {
     setToken,
     getToken,
-    getUserFromPayload
+    getUserFromPayload,
+    
 }

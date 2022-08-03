@@ -1,13 +1,13 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route} from 'react-router-dom'
 import ShowCar from './pages/ShowCar'
 import NewCar from './pages/NewCar';
 import Home from './pages/Home';
 import Navbar from './components/Navbar'
-import Login from './pages/LoginPage/Login';
-import Signup from './pages/SignupPage/Signup'
-import {getToken} from './utils/tokenServices'
+import Auth from './pages/AuthPage/Auth';
+
+
 
 
 
@@ -16,13 +16,8 @@ function App() {
   const [ cars, setCars  ] = useState([])
   const [user, setUser] = useState()
 
-  useEffect(() => {
-    fetch('http://localhost:4000/cars/',{
-      headers :new Headers({'Authorization':'Bearer ' + getToken()})
-    })
-    .then( res => res.json())
-    .then( cars => setCars(cars))
-  }, [])
+  
+ 
   
   console.log(cars)
 
@@ -37,8 +32,8 @@ function App() {
         <Route path='/' element = { <Home cars={cars} setCars={setCars} />} />
         <Route path="/newCar" element={ <NewCar addCar={addCar} />} />
         <Route path='/cars/:id' element={ <ShowCar cars={cars} />} />
-        <Route path='/login' element={<Login setUser={setUser}/>}/>
-        <Route path='/signup' element={<Signup setUser={setUser}/>}/>
+        <Route path='/login' element={<Auth setUser={setUser} page="login"/>}/>
+        <Route path='/signup' element={<Auth setUser={setUser} page="signup"/>}/>
       </Routes>
       
     </div>

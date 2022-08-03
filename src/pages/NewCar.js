@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState , useEffect} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import setAuthToken from '../utils/axios'
 import { getToken } from '../utils/tokenServices'
 
 
@@ -19,7 +20,11 @@ const NewCar = ({addCar}) => {
     photo: '',
    }
 
-const navigate = useNavigate()
+   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!getToken()) navigate('/login')
+  }, [])
 
 const [formData, setFormData] = useState(initialState)
   
@@ -36,8 +41,8 @@ const handlePhoto = (e) => {
 const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
-        const headers = {'Authorization': 'Bearer ' + getToken()}
-        axios.post('http://localhost:4000/cars', formData ,{headers})
+        setAuthToken()
+        axios.post('http://localhost:4000/cars', formData )
         .then(res =>  {
             setFormData(initialState)
             addCar(res.data)

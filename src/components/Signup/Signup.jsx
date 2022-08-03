@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import './Signup.css'
 import {setToken, getUserFromPayload} from '../../utils/tokenServices'
+
 
 
 
@@ -54,6 +55,10 @@ const Signup = ({setUser}) => {
                 <label htmlFor='password'>Confirm Password</label>
                 <input type='password' name='password' id="pass2" onChange={handleChange}/>
             </div>
+
+            <span><Link to='/login'>Already have an account?</Link></span>
+
+        
             <input type='submit' value="Sign Up" />
 
         </form>
