@@ -9,8 +9,6 @@ import Auth from './pages/AuthPage/Auth';
 
 
 
-
-
 function App() {
 
   const [ cars, setCars  ] = useState([])

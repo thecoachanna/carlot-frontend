@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from 'react'
-// import styled from 'styled-components'
-import axios from 'axios'
+import React, { useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Auth.css'
-import {setToken,getUserFromPayload,getToken} from '../../utils/tokenServices'
+import {getToken} from '../../utils/tokenServices'
 import Login from '../../components/Login/Login'
 import Signup from '../../components/Signup/Signup'
 
