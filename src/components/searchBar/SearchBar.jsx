@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './searchBar.css'
 import axios from 'axios'
+import setAuthToken from '../../utils/axios'
 
 
 const SearchBar = ({setCars}) => {
@@ -13,7 +14,7 @@ const SearchBar = ({setCars}) => {
   }
 
   const searchButtonHandler = () =>{
-    
+    setAuthToken()
     axios.get(`http://localhost:4000/cars/?search=${search}`)
     .then(res => {
       setCars(res.data)
