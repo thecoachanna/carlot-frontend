@@ -40,8 +40,8 @@ const Navbar = ({ setUser}) => {
     <NavbarContainer>
         <ul>
             { user && <li><span>Welcome {getName()}</span></li> }
-            <li> <Link to='/'> Home </Link></li>
-            <li> <Link to='/newcar'> New Listing</Link></li>
+            <li> <Link to='/cars'> Home </Link></li>
+            <li> <Link to='/cars/new'> New Listing</Link></li>
             <li><Link to='/Welcome'></Link></li>
 
     

@@ -6,8 +6,6 @@ import CarMap from '../../components/CarMap';
 
 const ShowCar = ({ cars }) => {
 
-
-
   let { id } = useParams()
   
   let car = cars.find(c => c._id === id)
@@ -18,55 +16,7 @@ const ShowCar = ({ cars }) => {
       <a href="/cars">Back</a>
       <h2>{car.make}</h2>
       <h2>${car.price}</h2>
-      {/* <img src={car.image} alt={car.name} /> <br/> */}
-
-{/* image carousel starts here */}
-<div
-            id="carouselExampleControls"
-            className="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div className="carousel-inner">
-              {car.image.map((img) => {
-                return (
-                  <div className="carousel-item active">
-                    <img
-                      src={img}
-                      className="d-block w-100"
-                      alt={img}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-            <button 
-            id={car._id}
-              className="carousel-control-prev"
-              // type="button"
-              data-bs-target="#carouselExampleControls"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleControls"
-              data-bs-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
-{/* image carousel ends here */}
-
+      
       <div style={{marginTop:"3rem", display:"flex", justifyContent:"center"}}>
       <CarMap 
       googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}

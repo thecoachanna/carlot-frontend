@@ -23,7 +23,7 @@ const Signup = ({setUser}) => {
             if(res.status === 200){
                 setToken(res.data.access)
                 setUser(getUserFromPayload())
-                navigate('/')
+                navigate('/cars')
             }
         }).catch(err=>{
             // console.log(err)
