@@ -40,8 +40,8 @@ const Navbar = ({ setUser}) => {
    /*  <NavbarContainer>
         <ul>
             { user && <li><span>Welcome {getName()}</span></li> }
-            <li> <Link to='/'> Home </Link></li>
-            <li> <Link to='/newcar'> New Listing</Link></li>
+            <li> <Link to='/cars'> Home </Link></li>
+            <li> <Link to='/cars/new'> New Listing</Link></li>
             <li><Link to='/Welcome'></Link></li>
 
     
@@ -57,7 +57,7 @@ const Navbar = ({ setUser}) => {
     <nav className="navbar navbar-expand-lg bg-light">
   <div className="container-fluid">
     <a className="navbar-brand" href="/">
-        <img src="https://png.clipart.me/image_preview/2eb/sport-car-27559.png" alt="" width="120" height="72" class="d-inline-block align-text-top"></img>
+        <img src="https://png.clipart.me/image_preview/2eb/sport-car-27559.png" alt="" width="120" height="72" className="d-inline-block align-text-top"></img>
     </a> 
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>

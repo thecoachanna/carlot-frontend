@@ -24,7 +24,7 @@ const Login = ({setUser}) => {
                 console.log(res.data.access)
                 setToken(res.data.access)
                 setUser(getUserFromPayload())
-                navigate('/')
+                navigate('/cars')
             }
         }).catch(err=>{
             // console.log(err)
