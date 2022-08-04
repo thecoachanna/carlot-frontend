@@ -3,11 +3,20 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import setAuthToken from '../utils/axios'
 import { getToken } from '../utils/tokenServices'
+import PlacesAutocomplete from "react-places-autocomplete";
 
 const NewCar = ({ addCar }) => {
+  const [address, setAddress] = useState("");
+
+  const handleInput = (value) => {
+    setAddress(value);
+  };
+
+  const handleSelect = (value) => {
+    setAddress(value);
+  };
+
   const initialState = {
-    make: "",
-    model: "",
     price: "",
     title: "",
     location: "",
@@ -18,6 +27,64 @@ const NewCar = ({ addCar }) => {
     ownerInfo: "",
     photo: "",
   };
+
+  // const navigate = useNavigate();
+
+  // const [formData, setFormData] = useState(initialState);
+
+  // const handleChange = (e) => {
+  //   console.log(e.target);
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.id]: e.target.value,
+  //     location: address,
+  //   });
+  // };
+
+  // const handlePhoto = (e) => {
+  //   setFormData({ ...formData, photo: e.target.files[0] });
+  //   console.log(formData.photo);
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(formData);
+  //   axios.post("http://localhost:4000/cars", formData).then((res) => {
+  //     setFormData(initialState);
+  //     addCar(res.data);
+  //     navigate("/cars", { replace: true });
+  //   });
+  // };
+
+  // return (
+    
+
+
+// const NewCar = ({ addCar }) => {
+
+//   const [address, setAddress] = useState("");
+
+//   const handleInput = (value) => {
+//     setAddress(value);
+//   };
+
+//   const handleSelect = (value) => {
+//     setAddress(value);
+//   };
+  
+//   const initialState = {
+//     make: "",
+//     model: "",
+//     price: "",
+//     title: "",
+//     location: "",
+//     mileage: "",
+//     transmission: "",
+//     color: "",
+//     notes: "",
+//     ownerInfo: "",
+//     photo: "",
+//   };
 
  
 
@@ -98,16 +165,34 @@ const handleSubmit = (e) => {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-3 text-center">
+          <PlacesAutocomplete
+        value={address}
+        onChange={handleInput}
+        onSelect={handleSelect}
+        id="location"
+        name="location"
+      >
+        {({ getInputProps, suggestions, getSuggestionItemProps }) => (
+          <div>
+            <label htmlFor="location">Location </label>
             <input
-              id="location"
-              name="location"
-              placeholder="Location"
-              type="text"
-              className="form-control"
-              onChange={handleChange}
+              {...getInputProps()}
             />
+            <div>
+              {suggestions.map((suggestion) => {
+                const style = suggestion.active
+                  ? { backgroundColor: "#ECF0F1", cursor: "pointer" }
+                  : { backgroundColor: "#FFFFFF", cursor: "pointer" };
+                return (
+                  <div {...getSuggestionItemProps(suggestion, { style })}>
+                    {suggestion.description}
+                  </div>
+                );
+              })}
+            </div>
           </div>
+        )}
+      </PlacesAutocomplete>
           <div className="mb-3 text-center">
             <input
               id="year"
