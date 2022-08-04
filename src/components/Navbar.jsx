@@ -65,14 +65,18 @@ const Navbar = ({ setUser}) => {
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
       <ul className="navbar-nav"> 
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/">Home</a>
+          <a className="nav-link active" aria-current="page" href="/cars">Home</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/Signup">Signup</a>
+        </li>
+      <li className="nav-item">
+          <a className="nav-link" href="/login">Login</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="/newcar">New Listing</a>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" href="Signup">Signup</a>
-        </li>
+        
     
         <li className="nav-item">
             <a className="nav-link" href='#' onClick={logout}>Logout</a>
