@@ -1,35 +1,34 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import { IoIosArrowBack, IoIosArrowForward} from "react-icons/io";
 import "./car.css";
 
 const Car = ({ car }) => {
-  const [current, setCurrent] = useState(0);
+
+  const [currentImg, setCurrentImg] = useState(0);
 
   let length = car.image.length;
 
-  const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
+  const nextImg = () => {
+    setCurrentImg(currentImg === length - 1 ? 0 : currentImg + 1);
   };
-  const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
+  const prevImg = () => {
+    setCurrentImg(currentImg === 0 ? length - 1 : currentImg - 1);
   };
 
   return (
     <div>
       <div className="col">
         <div className="card shadow-sm">
-          <section className="slider">
-            <BiLeftArrow className="left-arrow" onClick={prevSlide} />
-            <BiRightArrow className="right-arrow" onClick={nextSlide} />
-
+          <section className="carousel">
+            < IoIosArrowBack className="left-arrow" onClick={prevImg}/>
+            <IoIosArrowForward className="right-arrow" onClick={nextImg} />
             {car.image.map((img, index) => {
               return (
-                <div
-                  className={index === current ? "slide active" : "clide"}
-                  key={index}
-                >
-                  {index === current && (
+                <div 
+                className={index === currentImg ? 'slide active' : 'slide'}
+                key={index}>
+                  {index === currentImg && (
                     <img
                       src={img}
                       className="bd-placeholder-img card-img-top"

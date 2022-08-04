@@ -1,0 +1,21 @@
+/* .main{
+    border: 1rem solid red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-items: center;
+    align-items: flex-start;
+
+}
+.carImg{
+    width: 40vw;
+    height: auto;
+    margin-left: 2rem;
+    
+} */
+
+.image{ 
+    width: inherit ;
+
+}
+
