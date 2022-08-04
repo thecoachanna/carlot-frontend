@@ -1,7 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route} from 'react-router-dom'
-import ShowCar from './pages/ShowCar'
+import ShowCar from './pages/showCar/ShowCar'
 import NewCar from './pages/NewCar';
 import Home from './pages/Home';
 import Navbar from './components/Navbar'

@@ -27,7 +27,7 @@ const Navbar = ({user, setUser}) => {
             <li> <Link to='/cars/new'> New Listing</Link></li>
             <li> <Link to='/Welcome'> Welcome</Link></li>
             <li> <Link to='/user'> User</Link></li>
-            <li> <Link to='/logout'> Logout</Link></li>
+            <li> <Link to='/login'> Logout</Link></li>
         </ul>
     </NavbarContainer>
   )

@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react'
-// import { useParams } from 'react-router-dom';
-// import { GoogleMap } from '@react-google-maps/api'
 import { GoogleMap , withScriptjs, withGoogleMap, Marker } from "react-google-maps" 
 import Geocode from 'react-geocode'
 
@@ -9,6 +7,7 @@ Geocode.setApiKey(process.env.REACT_APP_GOOGLE_KEY);
 Geocode.setLanguage('en');
 
 const CarMap = withScriptjs(withGoogleMap( ({carLocation}) => {
+
 
  const [coordinates, setCoordinates] = useState({
     lat: null,
@@ -31,8 +30,8 @@ useEffect (() =>{
 
 return (
   <div> 
-    {coordinates?.lat && <GoogleMap defaultZoom={8} defaultCenter={{lat: parseInt(coordinates.lat), lng: parseInt(coordinates.lng)}}>
-    <Marker position={{lat: parseInt(coordinates.lat), lng: parseInt(coordinates.lng)}}/>
+    {coordinates?.lat && <GoogleMap defaultZoom={11} defaultCenter={{lat: coordinates.lat, lng: coordinates.lng}}>
+    <Marker position={{lat: coordinates.lat, lng: coordinates.lng}}/>
     </GoogleMap>}
   </div>
   )
