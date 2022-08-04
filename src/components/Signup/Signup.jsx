@@ -40,6 +40,13 @@ const Signup = ({setUser}) => {
 
         <form onSubmit={handleSubmit}>
             <h3>Sign Up</h3>
+                <div className="custom-control custom-checkbox text-center l">
+                    <span className="custom-control-label ">
+                        Welcome to Car Lot!<br /> A privately owned and sold used car app. <br/>
+                    </span>
+                </div>
+ 
+
                 <div className="mb-3">
                   <label>Email address</label>
                   <input

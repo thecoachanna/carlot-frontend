@@ -2,7 +2,7 @@
 * {
   box-sizing: border-box;
 }
-body {
+.wrapper{
   background: #1C8EF9 !important;
   min-height: 100vh;
   display: flex;
@@ -23,6 +23,7 @@ body, html, .App, #root, .auth-wrapper {
 }
 .auth-wrapper {
   display: flex;
+  margin-top: 5%;
   justify-content: center;
   flex-direction: column;
   text-align: left;
