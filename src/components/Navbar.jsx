@@ -70,11 +70,12 @@ const Navbar = ({ setUser}) => {
         <li className="nav-item">
           <a className="nav-link" href="/Signup">Signup</a>
         </li>
+        {/* add lines 41-52  */}
       <li className="nav-item">
           <a className="nav-link" href="/login">Login</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/newcar">New Listing</a>
+          <a className="nav-link" href="/cars/new">New Listing</a>
         </li>
         
     
@@ -90,9 +91,12 @@ const Navbar = ({ setUser}) => {
             <li><a className="dropdown-item" href="#">Action</a></li>
             <li><a className="dropdown-item" href="#">Another action</a></li>
             <li><a className="dropdown-item" href="#">Something else here</a></li>
+           
+            
           </ul>
         </li>
       </ul>
+     
     </div>
   </div>
 </nav>
