@@ -67,21 +67,30 @@ const Navbar = ({ setUser}) => {
         <li className="nav-item">
           <a className="nav-link active" aria-current="page" href="/cars">Home</a>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/Signup">Signup</a>
-        </li>
-        {/* add lines 41-52  */}
-      <li className="nav-item">
-          <a className="nav-link" href="/login">Login</a>
-        </li>
+
+        {
+          user ? 
+          <li className="nav-item">
+            <a className="nav-link" href='#' onClick={logout}>Logout</a>
+          </li>
+          :
+          <>
+            <li className="nav-item">
+              <a className="nav-link" href="/login">Login</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/Signup">Signup</a>
+            </li>
+          </>
+          
+        }
+   
+        
         <li className="nav-item">
           <a className="nav-link" href="/cars/new">New Listing</a>
         </li>
         
     
-        <li className="nav-item">
-            <a className="nav-link" href='#' onClick={logout}>Logout</a>
-        </li>
 
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

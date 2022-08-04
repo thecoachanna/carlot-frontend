@@ -40,29 +40,53 @@ const Login = ({setUser}) => {
 
 
   return (
-    <form onSubmit={handleSubmit} className='form'>
-        <h1>Login</h1>
+    
 
-        {Object.entries(errorMsg).map((keyName,keyIndex) =>{
-            return <span className='error'>{keyName}:{errorMsg[keyName]}</span>
-        })}
+    <form onSubmit={handleSubmit}>
+            <h3>Login</h3>
+            <div className="mb-3">
+            <label>Email address</label>
+            <input
+                type="email"
+                className="form-control"
+                placeholder="Enter email"
+                id="email"
+                onChange = {handleChange}
+                required
+            />
+            </div>
+            <div className="mb-3">
+            <label>Password</label>
+            <input
+                type="password"
+                className="form-control"
+                placeholder="Enter password"
+                id="password"
+                onChange = {handleChange}
+                required
+            />
+            </div>
+
+            <div className="mb-3 text-center">
+            <div className="custom-control custom-checkbox">
+                {Object.entries(errorMsg).map((keyName,keyIndex) =>{
+                    return <label className="custom-control-label text-danger">{keyName[1]}</label>
+                })}
+                
+            </div>
+            </div>
         
-
-        <div>
-            <label htmlFor='email'>Email</label>
-            <input type='text' name='email' id="email" onChange={handleChange}/>
-        </div>
-        <div>
-            <label htmlFor='password'>Password</label>
-            <input type='password' name='password' id="password" onChange={handleChange}/>
-        </div>
-        
-        <span>dont have an account? <Link to='/signup'>create one</Link></span>
-
-        <input type='submit' value="Log In" />
-
-    </form>
+            <div className="d-grid">
+            <button type="submit" className="btn btn-primary">
+                Submit
+            </button>
+            </div>
+            <p className="forgot-password text-right">
+             Don't have an aacount?<Link to="/signup">Create one</Link>
+            </p>
+      </form>
   )
 }
+
 
 export default Login

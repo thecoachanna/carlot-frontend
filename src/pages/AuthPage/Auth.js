@@ -19,10 +19,11 @@ const Auth = ({setUser,page}) => {
     
 
   return (
-    <div>
-      {page === 'login' ? <Login setUser={setUser}/> : <Signup setUser={setUser}/>} 
-
-    </div>
+    <div className="auth-wrapper">
+        <div className="auth-inner">
+            {page === 'login' ? <Login setUser={setUser}/> : <Signup setUser={setUser}/>} 
+        </div>
+    </div>  
     
     
    
