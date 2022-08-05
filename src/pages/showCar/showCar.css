@@ -1,0 +1,8 @@
+
+.image{ 
+    width: inherit ;
+}
+
+.col-6.selected{
+    background-color: black;
+}

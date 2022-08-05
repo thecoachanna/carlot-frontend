@@ -28,7 +28,7 @@ const handleSubmit = (e) => {
         console.log(res)
         if(res.status === 200){
             setUser(res.data)
-            navigate('/')
+            navigate('/cars')
         }
     })
 }

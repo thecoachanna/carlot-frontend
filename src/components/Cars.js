@@ -1,5 +1,5 @@
 import React from 'react'
-import Car from './Car'
+import Car from './car/Car'
 
 const Cars = ({cars}) => {
   return (
@@ -8,13 +8,17 @@ const Cars = ({cars}) => {
     ? 
     <div style={{margin:'30px'}}>No Car Registered!</div>
     :
-    <div>
+    <div className="album py-5 bg-light" >
+     <div className="container">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         { cars.map(car => {
-          return <Car car={car} />
-            
+          return <Car car={car} key={car._id}/>            
       })}
 
     </div>
+    </div>
+    </div>
+
   )
 }
 

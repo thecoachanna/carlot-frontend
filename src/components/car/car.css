@@ -1,0 +1,38 @@
+.carousel{
+    position: relative;   
+}
+
+.right-arrow{
+    position: absolute;
+    top: 40%;
+    right: 5px;
+    font-size: 3rem;
+    color: black;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+}
+
+.left-arrow{
+    position: absolute;
+    top: 40%;
+    left: 5px;
+    font-size: 3rem;
+    color: black;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+}
+
+.slide {
+    opacity: 0;
+    transition-duration: 1s ease;
+    overflow: hidden;
+  }
+  
+  .slide.active {
+    opacity:1;
+    transition-duration: 1s;
+    transform: 0.3s;
+  }
+
