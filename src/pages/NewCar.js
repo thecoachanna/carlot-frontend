@@ -198,21 +198,12 @@ const handlePutSubmit = (e) =>{
               type="text"
               className="form-select"
               onChange={handleChange}
+              value ={formData?.transmission}
             >
               <option defaultValue>Select Transmission...</option>
-              {
-                formData.transmission === 'automatic' ?
-                <>
-                  <option value="automatic" selected>Automatic</option>
-                  <option value="manual" >Manual</option>
-                </>
-                :
-                <>
-                  <option value="automatic" >Automatic</option>
-                  <option value="manual" selected>Manual</option>
-                </>
-
-              }
+              <option value="automatic">Automatic</option>
+              <option value="manual" >Manual</option>
+              
             </select>
           </div>
           <div className="mb-3 text-center">

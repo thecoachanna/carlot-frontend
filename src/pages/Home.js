@@ -6,7 +6,7 @@ import { getToken } from '../utils/tokenServices'
 import axios from 'axios'
 import setAuthToken from '../utils/axios'
 
-const Home = ({cars,setCars}) => {
+const Home = ({cars,setCars,searchQuery,getSearchQuery}) => {
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -14,19 +14,17 @@ const Home = ({cars,setCars}) => {
       navigate('/login')
     }else {
       setAuthToken()
-      axios.get('http://localhost:4000/cars/')
+      axios.get(`http://localhost:4000/cars/?search=${getSearchQuery()}`)
       .then((res) => setCars(res.data))
       .catch((err) => console.log(err.response.data))
     }
   }, [])
 
-  useEffect(() => {
-    if (!getToken()) navigate('/login')
-  })
+  
   
   return (
     <div>
-        <SearchBar setCars={setCars}/><br />
+        
         <Cars cars={cars}/>
     </div>
   )
