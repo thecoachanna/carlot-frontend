@@ -28,7 +28,6 @@ const NewCar = ({ addCar }) => {
     photo: "",
   };
 
- 
 
   const navigate = useNavigate();
 

@@ -37,31 +37,82 @@ const Signup = ({setUser}) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="form">
-            <h1>Signup</h1>
 
-            {Object.entries(errorMsg).map((keyName,keyIndex) =>{
-            return <span className='error'>{keyName}:{errorMsg[keyName]}</span>
-             })}
-            <div>
-                <label htmlFor='email'>Email</label>
-                <input type='text' name='name' id="email" onChange={handleChange}/>
-            </div>
-            <div>
-                <label htmlFor='password'>Password</label>
-                <input type='password' name='password' id="pass1" onChange={handleChange}/>
-            </div>
-            <div>
-                <label htmlFor='password'>Confirm Password</label>
-                <input type='password' name='password' id="pass2" onChange={handleChange}/>
-            </div>
+        <form onSubmit={handleSubmit}>
+            <h3>Sign Up</h3>
+                <div className="custom-control custom-checkbox text-center l">
+                    <span className="custom-control-label ">
+                        Welcome to Car Lot!<br /> A privately owned and sold used car app. <br/>
+                    </span>
+                </div>
+ 
 
-            <span><Link to='/login'>Already have an account?</Link></span>
+                <div className="mb-3">
+                  <label>Email Address</label>
+                  <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Enter email"
+                        id="email"
+                        onChange = {handleChange}
+                        required
+                    />
+                </div>
 
+                <div className="mb-3">
+                  <label>First Name</label>
+                  <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter First Name"
+                        id="name"
+                        onChange = {handleChange}
+                        required
+                    />
+                </div>
+                
+                <div className="mb-3">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        placeholder="Enter password"
+                        id="pass1"
+                        onChange = {handleChange}
+                        required
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label>Confirm Password</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        placeholder="Repeat password"
+                        id="pass2"
+                        onChange = {handleChange}
+                        required
+                    />
+                </div>
+
+            <div className="mb-3 text-center">
+            <div className="custom-control custom-checkbox">
+                {Object.entries(errorMsg).map((keyName,keyIndex) =>{
+                    return <label className="custom-control-label text-danger">{keyName[1]}</label>
+                })}
+                
+            </div>
+            </div>
         
-            <input type='submit' value="Sign Up" />
-
-        </form>
+            <div className="d-grid">
+            <button type="submit" className="btn btn-primary">
+                Submit
+            </button>
+            </div>
+            <p className="forgot-password text-right">
+                Already have an aacount?<Link to="/login">Login</Link>
+            </p>
+      </form>
     )
 }
 
