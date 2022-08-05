@@ -130,9 +130,9 @@ const NewCar = ({ addCar }) => {
             name="location"
           >
             {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-              <div className="form-control mb-3">
-                <label htmlFor="location">Location </label>
-                <input {...getInputProps()} />
+              <div>
+                {/* <label htmlFor="location">Location </label> */}
+                <input {...getInputProps({placeholder:"Location"})} className="form-control mb-3"/>
                 <div>
                   {suggestions.map((suggestion) => {
                     const style = suggestion.active
