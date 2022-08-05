@@ -40,8 +40,8 @@ const Navbar = ({ setUser}) => {
    /*  <NavbarContainer>
         <ul>
             { user && <li><span>Welcome {getName()}</span></li> }
-            <li> <Link to='/'> Home </Link></li>
-            <li> <Link to='/newcar'> New Listing</Link></li>
+            <li> <Link to='/cars'> Home </Link></li>
+            <li> <Link to='/cars/new'> New Listing</Link></li>
             <li><Link to='/Welcome'></Link></li>
 
     
@@ -54,41 +54,49 @@ const Navbar = ({ setUser}) => {
         </ul>
     </NavbarContainer>
  */
-    <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-        <img src="https://png.clipart.me/image_preview/2eb/sport-car-27559.png" alt="" width="120" height="72" class="d-inline-block align-text-top"></img>
+    <nav className="navbar navbar-expand-lg bg-light">
+  <div className="container-fluid">
+    <a className="navbar-brand" href="/">
+        <img src="https://png.clipart.me/image_preview/2eb/sport-car-27559.png" alt="" width="120" height="72" className="d-inline-block align-text-top"></img>
     </a> 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+    <div className="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul className="navbar-nav"> 
+        <li className="nav-item">
+          <a className="nav-link active" aria-current="page" href="/cars">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/newcar">New Listing</a>
+        <li className="nav-item">
+          <a className="nav-link" href="/Signup">Signup</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="Signup">Signup</a>
+        {/* add lines 41-52  */}
+      <li className="nav-item">
+          <a className="nav-link" href="/login">Login</a>
         </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/cars/new">New Listing</a>
+        </li>
+        
     
-        <li class="nav-item">
-            <a class="nav-link" href='#' onClick={logout}>Logout</a>
+        <li className="nav-item">
+            <a className="nav-link" href='#' onClick={logout}>Logout</a>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li className="nav-item dropdown">
+          <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown link
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <ul className="dropdown-menu">
+            <li><a className="dropdown-item" href="#">Action</a></li>
+            <li><a className="dropdown-item" href="#">Another action</a></li>
+            <li><a className="dropdown-item" href="#">Something else here</a></li>
+           
+            
           </ul>
         </li>
       </ul>
+     
     </div>
   </div>
 </nav>

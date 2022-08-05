@@ -18,8 +18,6 @@ const SearchBar = ({setCars}) => {
     axios.get(`http://localhost:4000/cars/?search=${search}`)
     .then(res => {
       setCars(res.data)
-
-
     })
 
   }
