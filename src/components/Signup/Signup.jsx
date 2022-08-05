@@ -109,7 +109,7 @@ const Signup = ({setUser}) => {
             </button>
             </div>
             <p className="forgot-password text-right">
-                Already have an aacount?<Link to="/login">Login</Link>
+                Already have an account? <Link to="/login">Login</Link>
             </p>
       </form>
     )
