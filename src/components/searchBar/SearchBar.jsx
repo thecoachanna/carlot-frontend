@@ -23,13 +23,19 @@ const SearchBar = ({setCars}) => {
   }
   return (
     <div className="wrap">
-        <div className="search">
+       {/*  <div className="search">
             <input type="text" className="searchTerm" placeholder="What are you looking for?" onChange={handleChange}/>
             <button type="submit" className="searchButton" onClick={searchButtonHandler}>
               <i className="fa fa-search"></i>
-            </button>
+              </button> */}
+
+              <div className="d-flex" role="search">
+        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={handleChange}></input>
+        <button className="btn btn-outline-success" type="submit" onClick={searchButtonHandler}>Search</button>
+      </div>
+            
         </div>
-     </div>
+   /*   </div> */
     
   )
 }
