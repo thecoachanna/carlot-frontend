@@ -138,7 +138,9 @@ const handlePutSubmit = (e) =>{
               value={formData?.title}
             />
           </div>
-          <PlacesAutocomplete
+          {
+            !edit &&
+            <PlacesAutocomplete
             value={address}
             onChange={handleInput}
             onSelect={handleSelect}
@@ -164,6 +166,8 @@ const handlePutSubmit = (e) =>{
               </div>
             )}
           </PlacesAutocomplete>
+          }
+          
           <div className="mb-3 text-center">
             <input
               id="year"
