@@ -8,6 +8,7 @@ import PlacesAutocomplete from "react-places-autocomplete";
 const NewCar = ({ addCar }) => {
   const [address, setAddress] = useState("");
 
+
   const handleInput = (value) => {
     setAddress(value);
   };
@@ -107,7 +108,7 @@ const handleSubmit = (e) => {
               onChange={handleChange}
             />
           </div>
-          <PlacesAutocomplete
+          <PlacesAutocomplete 
             value={address}
             onChange={handleInput}
             onSelect={handleSelect}
@@ -117,7 +118,7 @@ const handleSubmit = (e) => {
             {({ getInputProps, suggestions, getSuggestionItemProps }) => (
               <div>
                 <label htmlFor="location">Location </label>
-                <input {...getInputProps()} />
+                <input {...getInputProps()}/>
                 <div>
                   {suggestions.map((suggestion) => {
                     const style = suggestion.active
