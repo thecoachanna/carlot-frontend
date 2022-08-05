@@ -14,12 +14,6 @@ const ShowCar = ({ cars }) => {
   const user =getUserFromPayload() 
 
   let car = cars.find((c) => c._id === id);
-  console.log(car);
-
-  //   function getName(){
-  //     return user.email.split('@')[0]
-  // }
-  // console.log(user);
 
   const [currentImg, setCurrentImg] = useState(0);
  
@@ -54,18 +48,6 @@ const ShowCar = ({ cars }) => {
         <div className="row g-2">
           <div className="col-6">
             <div className="p-3 border bg-light">
-
-              {/* {length===1 ? (<img
-                src={car.image[0]}
-                className="img-thumbnail"
-                alt={car.make}
-              />) : ()} */}
-
-              {/* <img
-                src={car.image[0]}
-                className="img-thumbnail"
-                alt={car.make}
-              /> */}
 
               <section className="carousel">
            

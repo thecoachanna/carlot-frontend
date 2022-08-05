@@ -29,7 +29,7 @@ const Signup = ({setUser}) => {
             // console.log(err)
             const res = err.response
             if(res.status === 400){
-                console.log(res.data)
+                // console.log(res.data)
                 setErrorMsg(res.data)
             }
         })

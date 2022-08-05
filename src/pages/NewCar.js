@@ -7,7 +7,9 @@ import PlacesAutocomplete from "react-places-autocomplete";
 // import { Image } from 'cloudinary-react';
 import "./NewCar.css";
 
+
 const NewCar = ({ addCar ,setCars, edit}) => {
+
 
   const initialState = {
     price: "",
@@ -97,7 +99,6 @@ const handlePutSubmit = (e) =>{
         setCars(res.data)
         navigate(`/cars/${id}`, { replace: true })
     })
-
 }
 
 
@@ -154,6 +155,7 @@ const handlePutSubmit = (e) =>{
               value={formData?.title}
             />
           </div>
+
           {
             !edit &&
             <PlacesAutocomplete
@@ -165,6 +167,7 @@ const handlePutSubmit = (e) =>{
           >
             {({ getInputProps, suggestions, getSuggestionItemProps }) => (
               <div>
+
                 {/* <label htmlFor="location">Location </label> */}
                 <input {...getInputProps({placeholder:"Location"})} className="form-control mb-3"/>
                 <div>

@@ -26,6 +26,7 @@ function App() {
     <div className="App">
       <Navbar user={user} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setCars={setCars}/>
       <Routes>
+
         <Route path='/cars' element = { <Home getSearchQuery={getSearchQuery} cars={cars} setCars={setCars} />} />
         <Route path="/cars/new" element={ <NewCar addCar={addCar} setCars={setCars} edit={false} />} />
         <Route path="/cars/:id/edit" element={ <NewCar addCar={addCar} setCars={setCars} edit={true}/>} />

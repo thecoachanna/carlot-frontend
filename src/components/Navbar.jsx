@@ -1,36 +1,34 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Link,useNavigate } from 'react-router-dom'
+// import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import { setToken } from '../utils/tokenServices'
 import { getUserFromPayload } from '../utils/tokenServices'
 import SearchBar from './searchBar/SearchBar'
 
 
-const NavbarContainer = styled.nav`
-    background-color: #c0ffee;
-    padding: 5px;
+// const NavbarContainer = styled.nav`
+//     background-color: #c0ffee;
+//     padding: 5px;
     
-    ul {
-        display: flex;
-        justify-content: space-evenly;
-    }
+//     ul {
+//         display: flex;
+//         justify-content: space-evenly;
+//     }
 
-    li {
-        list-style: none;
-    }
-    
-`
+//     li {
+//         list-style: none;
+//     }  
+// `
 
 const Navbar = ({ setUser, setCars,searchQuery,setSearchQuery}) => {
     const navigate = useNavigate()
     const user = getUserFromPayload()
 
-    console.log(user)
+    // console.log(user.name)
 
     function logout(){
         setToken()
         navigate('/login')
-
     }
 
     
@@ -39,6 +37,7 @@ const Navbar = ({ setUser, setCars,searchQuery,setSearchQuery}) => {
    
     <nav className="navbar navbar-expand-lg bg-light">
   <div className="container-fluid">
+
     <Link className="navbar-brand" to="/">
         <img src="https://png.clipart.me/image_preview/2eb/sport-car-27559.png" alt="" width="120" height="72" className="d-inline-block align-text-top"></img>
     </Link> 

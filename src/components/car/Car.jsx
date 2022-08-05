@@ -40,16 +40,16 @@ const Car = ({ car }) => {
             })}
           </section>
 
-          <div style={{ textAlign: "center", marginTop: "0.5rem" }}>
-            <h2>{car.make} </h2>
+          <div style={{ textAlign: "center", marginTop: "0.5rem"}}>
+            <h2 style={{marginBlockEnd:"0"}}>{car.make}</h2>
           </div>
-
-          <div className="card-body">
+          <div className="card-body" >
             <p className="card-text"> Model: {car.model} </p>
             <p className="card-text">Price: ${car.price} </p>
+            <p className="card-text">Year: {car.year} </p>
             <div className="d-flex justify-content-between align-items-center">
               <Link to={`/cars/${car._id}`}>
-                <button className="btn btn-sm btn-outline-secondary">
+                <button className="btn btn-sm btn-outline-secondary mt-3" >
                   Details
                 </button>
               </Link>
