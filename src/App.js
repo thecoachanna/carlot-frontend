@@ -12,6 +12,11 @@ function App() {
 
   const [ cars, setCars  ] = useState([])
   const [user, setUser] = useState()
+  const [searchQuery,setSearchQuery] =useState("")
+
+  function getSearchQuery(){
+    return searchQuery
+  }
 
   const addCar = (car) => {
     setCars([...cars, car])
@@ -19,14 +24,16 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar user={user}/>
+      <Navbar user={user} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setCars={setCars}/>
       <Routes>
-        <Route path='/cars' element = { <Home cars={cars} setCars={setCars} />} />
-        <Route path="/cars/new" element={ <NewCar addCar={addCar} />} />
-        <Route path='/cars/:id' element={ <ShowCar cars={cars}/>} />
+
+        <Route path='/cars' element = { <Home getSearchQuery={getSearchQuery} cars={cars} setCars={setCars} />} />
+        <Route path="/cars/new" element={ <NewCar addCar={addCar} setCars={setCars} edit={false} />} />
+        <Route path="/cars/:id/edit" element={ <NewCar addCar={addCar} setCars={setCars} edit={true}/>} />
+        <Route path='/cars/:id' element={ <ShowCar cars={cars} user={user} />} />
         <Route path='/login' element={<Auth setUser={setUser} page="login"/>}/>
         <Route path='/signup' element={<Auth setUser={setUser} page="signup"/>}/>
-        <Route path="*" element={<Home cars={cars} setCars={setCars}/>} />
+        <Route path="*" element={<Home cars={cars} getSearchQuery={getSearchQuery} setCars={setCars}/>} />
        
 
       </Routes>
