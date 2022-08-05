@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+
 import Review from "../../components/Review";
 import CarMap from "../../components/CarMap";
 import "./showCar.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
+import { getUserFromPayload } from '../../utils/tokenServices'
 // import { setToken } from '../utils/tokenServices'
-// import { getUserFromPayload } from '../utils/tokenServices'
 
-const ShowCar = ({ cars, user }) => {
+const ShowCar = ({ cars }) => {
   let { id } = useParams();
+  const user =getUserFromPayload() 
 
   let car = cars.find((c) => c._id === id);
   console.log(car);
@@ -117,12 +119,23 @@ const ShowCar = ({ cars, user }) => {
                 <li>Title: {car.title}</li>
                 <li>Color: {car.color}</li>
                 <hr />
-                <Link to={'/cars'}>
-                <button className="btn btn-sm btn-outline-secondary"
-                onClick={() => deleteCar(car._id)}>
-                  Delete
-                </button>
-                </Link>
+                
+                {
+                  car.owner === user.id &&
+                  <Link to={`/cars/${car._id}/edit`} className="btn btn-sm btn-outline-secondary">
+                    Edit
+                  </Link>
+                }
+                {
+                  car.owner === user.id &&
+                  <Link to={'/cars'}>
+                    <button className="btn btn-sm btn-outline-secondary"
+                      onClick={() => deleteCar(car._id)}>
+                      Delete
+                    </button>
+                  </Link>
+                }  
+                
               </ul>
             </div>
           </div>

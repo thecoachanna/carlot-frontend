@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios, { Axios, AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 import setAuthToken from "../utils/axios";
 import { getToken } from "../utils/tokenServices";
 import PlacesAutocomplete from "react-places-autocomplete";
 // import { Image } from 'cloudinary-react';
 import "./NewCar.css";
 
-const NewCar = ({ addCar }) => {
-  const [address, setAddress] = useState("");
-
-  const handleInput = (value) => {
-    setAddress(value);
-  };
-
-  const handleSelect = (value) => {
-    setAddress(value);
-  };
+const NewCar = ({ addCar ,setCars, edit}) => {
 
   const initialState = {
     price: "",
@@ -29,14 +20,33 @@ const NewCar = ({ addCar }) => {
     ownerInfo: "",
     photo: "",
   };
+  const [address, setAddress] = useState("");
+  const [formData, setFormData] = useState(initialState)
+  let { id } = useParams()
+
+  const handleInput = (value) => {
+    setAddress(value);
+  };
+
+  const handleSelect = (value) => {
+    setAddress(value);
+  };
+
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!getToken()) navigate("/login");
+    if(edit){
+      axios.get(`http://localhost:4000/cars/${id}`)
+      .then(res =>{
+        setFormData(res.data)
+        setAddress(res.data.address)
+
+      })
+    }
   }, []);
 
-  const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {
     console.log(e.target);
@@ -76,12 +86,30 @@ const NewCar = ({ addCar }) => {
         navigate("/cars", { replace: true });
       });
   };
+  
+
+const handlePutSubmit = (e) =>{
+    e.preventDefault()
+    setAuthToken()
+    axios.put(`http://localhost:4000/cars/${id}`, formData )
+    .then(res =>  {
+        setFormData(initialState)
+        setCars(res.data)
+        navigate(`/cars/${id}`, { replace: true })
+    })
+
+}
+
 
   return (
     <div className="NewCar">
       <div className="NewForm col-6 offset-3 p-2">
-        <form onSubmit={handleSubmit}>
-          <h1 className="text-center mb-3">Create a new listing.</h1>
+        <form onSubmit={edit ? handlePutSubmit : handleSubmit} >
+          {
+            
+            edit ? <h1 className="text-center mb-3">Edit Car</h1>
+            : <h1 className="text-center mb-3">Create a new listing.</h1>
+          }
           <div className="mb-3 text-center">
             <input
               id="make"
@@ -90,6 +118,7 @@ const NewCar = ({ addCar }) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.make}
             />
           </div>
           <div className="mb-3 text-center">
@@ -100,6 +129,7 @@ const NewCar = ({ addCar }) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.model}
             />
           </div>
           <div className="mb-3 text-center">
@@ -110,6 +140,7 @@ const NewCar = ({ addCar }) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.price}
             />
           </div>
           <div className="mb-3 text-center">
@@ -120,9 +151,12 @@ const NewCar = ({ addCar }) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.title}
             />
           </div>
-          <PlacesAutocomplete
+          {
+            !edit &&
+            <PlacesAutocomplete
             value={address}
             onChange={handleInput}
             onSelect={handleSelect}
@@ -148,6 +182,8 @@ const NewCar = ({ addCar }) => {
               </div>
             )}
           </PlacesAutocomplete>
+          }
+          
           <div className="mb-3 text-center">
             <input
               id="year"
@@ -156,6 +192,7 @@ const NewCar = ({ addCar }) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.year}
             />
           </div>
           <div className="mb-3 text-center">
@@ -166,6 +203,7 @@ const NewCar = ({ addCar }) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.mileage}
             />
           </div>
           <div className="mb-3 text-center">
@@ -180,10 +218,12 @@ const NewCar = ({ addCar }) => {
               type="text"
               className="form-select"
               onChange={handleChange}
+              value ={formData?.transmission}
             >
               <option defaultValue>Select Transmission...</option>
-              <option value="1">Automatic</option>
-              <option value="2">Manual</option>
+              <option value="automatic">Automatic</option>
+              <option value="manual" >Manual</option>
+              
             </select>
           </div>
           <div className="mb-3 text-center">
@@ -194,6 +234,8 @@ const NewCar = ({ addCar }) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.color}
+              
             />
           </div>
           <div className="form-floating mb-3 text-center">
@@ -203,12 +245,15 @@ const NewCar = ({ addCar }) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.notes}
             ></textarea>
             <label htmlFor="floatingTextarea">
               Tell us more about your car...
             </label>
           </div>
-          <div className="mb-3 text-center">
+          {
+            !edit &&
+            <div className="mb-3 text-center">
             <input
               id="photo"
               name="photo"
@@ -221,6 +266,8 @@ const NewCar = ({ addCar }) => {
               }}
             />
           </div>
+          }
+          
 
           <div className="col-auto mb-3">
             <button
