@@ -82,7 +82,7 @@ const Login = ({setUser}) => {
             </button>
             </div>
             <p className="forgot-password text-right">
-             Don't have an aacount?<Link to="/signup">Create one</Link>
+             Don't have an account?<Link to="/signup">Create one</Link>
             </p>
       </form>
   )

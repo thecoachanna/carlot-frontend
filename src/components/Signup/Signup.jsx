@@ -48,7 +48,7 @@ const Signup = ({setUser}) => {
  
 
                 <div className="mb-3">
-                  <label>Email address</label>
+                  <label>Email Address</label>
                   <input
                         type="email"
                         className="form-control"
@@ -60,11 +60,11 @@ const Signup = ({setUser}) => {
                 </div>
 
                 <div className="mb-3">
-                  <label>Fullname</label>
+                  <label>First Name</label>
                   <input
                         type="text"
                         className="form-control"
-                        placeholder="Enter Fullname"
+                        placeholder="Enter First Name"
                         id="name"
                         onChange = {handleChange}
                         required

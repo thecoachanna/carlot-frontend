@@ -28,62 +28,9 @@ const NewCar = ({ addCar }) => {
     photo: "",
   };
 
-  // const navigate = useNavigate();
-
-  // const [formData, setFormData] = useState(initialState);
-
-  // const handleChange = (e) => {
-  //   console.log(e.target);
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.id]: e.target.value,
-  //     location: address,
-  //   });
-  // };
-
-  // const handlePhoto = (e) => {
-  //   setFormData({ ...formData, photo: e.target.files[0] });
-  //   console.log(formData.photo);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(formData);
-  //   axios.post("http://localhost:4000/cars", formData).then((res) => {
-  //     setFormData(initialState);
-  //     addCar(res.data);
-  //     navigate("/cars", { replace: true });
-  //   });
-  // };
-
-  // return (
-
-  // const NewCar = ({ addCar }) => {
-
-  //   const [address, setAddress] = useState("");
-
-  //   const handleInput = (value) => {
-  //     setAddress(value);
-  //   };
-
-  //   const handleSelect = (value) => {
-  //     setAddress(value);
-  //   };
-
-  //   const initialState = {
-  //     make: "",
-  //     model: "",
-  //     price: "",
-  //     title: "",
-  //     location: "",
-  //     mileage: "",
-  //     transmission: "",
-  //     color: "",
-  //     notes: "",
-  //     ownerInfo: "",
-  //     photo: "",
-  //   };
-
+  
+  
+ 
   const navigate = useNavigate();
 
   useEffect(() => {
