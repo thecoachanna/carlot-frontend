@@ -1,35 +1,33 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Link,useNavigate } from 'react-router-dom'
+// import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import { setToken } from '../utils/tokenServices'
 import { getUserFromPayload } from '../utils/tokenServices'
 
 
-const NavbarContainer = styled.nav`
-    background-color: #c0ffee;
-    padding: 5px;
+// const NavbarContainer = styled.nav`
+//     background-color: #c0ffee;
+//     padding: 5px;
     
-    ul {
-        display: flex;
-        justify-content: space-evenly;
-    }
+//     ul {
+//         display: flex;
+//         justify-content: space-evenly;
+//     }
 
-    li {
-        list-style: none;
-    }
-    
-`
+//     li {
+//         list-style: none;
+//     }  
+// `
 
 const Navbar = ({ setUser}) => {
     const navigate = useNavigate()
     const user = getUserFromPayload()
 
-    console.log(user)
+    // console.log(user.name)
 
     function logout(){
         setToken()
         navigate('/login')
-
     }
 
   return (
@@ -93,8 +91,7 @@ const Navbar = ({ setUser}) => {
           <a className="nav-link" href="/cars/new">New Listing</a>
         </li>
         
-    
-
+  
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown link

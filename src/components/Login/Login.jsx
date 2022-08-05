@@ -19,9 +19,9 @@ const Login = ({setUser}) => {
         e.preventDefault()
         axios.post('http://localhost:4000/auth/login', formData)
         .then(res =>{
-            console.log(res)
+            // console.log(res)
             if(res.status === 200){
-                console.log(res.data.access)
+                // console.log(res.data.access)
                 setToken(res.data.access)
                 setUser(getUserFromPayload())
                 navigate('/cars')
@@ -30,7 +30,7 @@ const Login = ({setUser}) => {
             // console.log(err)
             const res = err.response
             if(res.status === 400){
-                console.log(res.data)
+                // console.log(res.data)
                 setErrorMsg(res.data)
             }
 

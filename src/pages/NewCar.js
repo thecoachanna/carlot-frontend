@@ -39,7 +39,7 @@ const NewCar = ({ addCar }) => {
 const [formData, setFormData] = useState(initialState)
   
 const handleChange = (e) => {
-        console.log(e.target)
+        // console.log(e.target)
         setFormData({...formData, [e.target.id] : e.target.value})
 }
     
@@ -51,7 +51,7 @@ const handlePhoto = (e) => {
 
 const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
+        // console.log(formData)
         setAuthToken()
         axios.post('http://localhost:4000/cars', formData, {header: {'Content-Type' : 'multipart/form-data'}} )
         .then(res =>  {

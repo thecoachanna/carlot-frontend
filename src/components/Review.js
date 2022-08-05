@@ -1,81 +1,89 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-// import { useNavigate } from 'react-router-dom'
-import {useState , useEffect } from 'react'
-// import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import setAuthToken from '../utils/axios';
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import setAuthToken from "../utils/axios";
 
+const Review = ({ ownerId }) => {
+  useEffect(() => {
+    setAuthToken();
+    axios
+      .get(`http://localhost:4000/users/${ownerId}/reviews`)
+      // console.log(res.data)
+      .then((res) => {
+        setReviews(res.data);
+      });
+  }, []);
 
+  const [reviews, setReviews] = useState([]);
 
-const Review = ({ownerId}) => {
+  const addReview = (review) => {
+    setReviews([...reviews, review]);
+  };
 
-//     let { id } = useParams()
+  const initialState = {
+    text: "",
+  };
 
-    useEffect(() => {
-        setAuthToken()
-        axios.get(`http://localhost:4000/users/${ownerId}/reviews`)
-        // console.log(res.data)
-        .then(res => {
-        setReviews(res.data)
-        })
-    },[])
+  const [formData, setFormData] = useState(initialState);
 
+  const handleChange = (e) => {
+    setFormData({ text: e.target.value });
+  };
 
-
-    
-    const [reviews, setReviews] = useState([])
-    
-    const addReview = (review) => {
-        setReviews([...reviews, review])
-        
-    }
-
-        const initialState = {
-        text: ''
-       
-       }
-
-// const navigate = useNavigate()
-
-const [formData, setFormData] = useState(initialState)
-  
-const handleChange = (e) => {
-        setFormData({text : e.target.value})
-    }
-  
-const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(formData)
-        setAuthToken()
-        axios.post(`http://localhost:4000/users/${ownerId}/reviews`, formData )
-        .then(res =>  {
-            setFormData(initialState)
-            addReview(res.data.text)
-            
-        })
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    setAuthToken();
+    axios
+      .post(`http://localhost:4000/users/${ownerId}/reviews`, formData)
+      .then((res) => {
+        setFormData(initialState);
+        addReview(res.data.text);
+      });
+  };
 
   return (
     <div>
-        
-    <form onSubmit={handleSubmit}>
-    <div >
-            <label htmlFor='review'>Review</label>
-            <input id='review' name='review' type='textarea' onChange={handleChange} />
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3" style={{ width: "70%", marginLeft: "15%" }}>
+          <label htmlFor="review" style={{ marginTop: "2rem" }}>
+            Seller Review
+          </label>
+          <textarea
+            id="review"
+            name="review"
+            className="form-control"
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <input
+          type="submit"
+          value="Post Review"
+          className="btn btn-sm btn-outline-secondary"
+          style={{ marginLeft: "15%", marginBottom: "2rem" }}
+        />
+      </form>
+
+      {reviews.length === 0
+        ? "No Reviews for this Seller"
+        : reviews.map((review) => {
+            return (
+              <figure
+                className="form-control"
+                style={{ width: "70%", marginLeft: "15%" }}
+              >
+                <blockquote className="blockquote">
+                  <p key={review._id}>{review}</p>
+                </blockquote>
+                <figcaption className="blockquote-footer">
+                  {/* {user.name}  */}
+                  {/* <cite title="Source Title">Source Title</cite> */}
+                </figcaption>
+              </figure>
+            );
+          })}
     </div>
-        <input type='submit' value='Post Review' />
-    </form>
-    {reviews.length === 0 ? 'No Reviews for this Seller' : (reviews.map((review) => { return <p key={review}>{review}</p>}))}
-    
-{/* <div className="mb-3">
-    <label htmlFor="exampleFormControlTextarea1" className="form-label">Review</label>
-    <input className="form-control" id="exampleFormControlTextarea1" rows="3"/>
-</div> */}
+  );
+};
 
-  </div>
-  )
-}
-
-
-export default Review
+export default Review;
