@@ -24,9 +24,8 @@ function App() {
         <Route path='/cars' element = { <Home cars={cars} setCars={setCars} />} />
         <Route path="/cars/new" element={ <NewCar addCar={addCar} />} />
         <Route path='/cars/:id' element={ <ShowCar cars={cars} user={user} />} />
-        <Route path='/' element={<Auth setUser={setUser} page="login"/>}/>
+        <Route path='/login' element={<Auth setUser={setUser} page="login"/>}/>
         <Route path='/signup' element={<Auth setUser={setUser} page="signup"/>}/>
-        <Route path="*" component={<Home/>} />
       </Routes>
       
     </div>

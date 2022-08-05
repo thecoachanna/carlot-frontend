@@ -21,8 +21,8 @@ const Car = ({ car }) => {
       <div className="col">
         <div className="card shadow-sm">
           <section className="carousel">
-            < IoIosArrowBack className="left-arrow" onClick={prevImg}/>
-            <IoIosArrowForward className="right-arrow" onClick={nextImg} />
+            < IoIosArrowBack className="left-arrow" style={length>1 ?{ opacity:"1" } : {opacity:"0"}} onClick={prevImg}/>
+            <IoIosArrowForward className="right-arrow" style={length>1 ?{ opacity:"1" } : {opacity:"0"}} onClick={nextImg} />
             {car.image.map((img, index) => {
               return (
                 <div 

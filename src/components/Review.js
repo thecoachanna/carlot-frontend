@@ -62,12 +62,18 @@ const handleSubmit = (e) => {
     <form onSubmit={handleSubmit}>
     <div >
             <label htmlFor='review'>Review</label>
-            <input id='review' name='review' type='text' onChange={handleChange} />
+            <input id='review' name='review' type='textarea' onChange={handleChange} />
     </div>
         <input type='submit' value='Post Review' />
     </form>
-    {reviews.length === 0 ? 'No Reviews for this Seller' : (reviews.map((review) => { return <p>{review}</p>}))}
-    </div>
+    {reviews.length === 0 ? 'No Reviews for this Seller' : (reviews.map((review) => { return <p key={review}>{review}</p>}))}
+    
+{/* <div className="mb-3">
+    <label htmlFor="exampleFormControlTextarea1" className="form-label">Review</label>
+    <input className="form-control" id="exampleFormControlTextarea1" rows="3"/>
+</div> */}
+
+  </div>
   )
 }
 
