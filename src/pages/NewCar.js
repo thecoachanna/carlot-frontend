@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { Axios, AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import setAuthToken from "../utils/axios";
 import { getToken } from "../utils/tokenServices";
 import PlacesAutocomplete from "react-places-autocomplete";
+// import { Image } from 'cloudinary-react';
+import "./NewCar.css";
 
 const NewCar = ({ addCar }) => {
   const [address, setAddress] = useState("");
@@ -28,44 +30,57 @@ const NewCar = ({ addCar }) => {
     photo: "",
   };
 
-
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!getToken()) navigate("/login");
   }, []);
 
+  const [formData, setFormData] = useState(initialState);
 
-const [formData, setFormData] = useState(initialState)
-  
-const handleChange = (e) => {
-        console.log(e.target)
-        setFormData({...formData, [e.target.id] : e.target.value})
-}
-    
-const handlePhoto = (e) => {
-    setFormData({ ...formData, photos: e.target.files })
-   
-}
-  
+  const handleChange = (e) => {
+    console.log(e.target);
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
 
-const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(formData)
-        setAuthToken()
-        axios.post('http://localhost:4000/cars', formData, {header: {'Content-Type' : 'multipart/form-data'}} )
-        .then(res =>  {
-            setFormData(initialState)
-            addCar(res.data)
-            navigate('/cars', { replace: true })
-        })
-}
+  const [imageSelected, setImageSelected] = useState("");
 
+  const uploadImage = () => {
+    const formData = new FormData();
+    formData.append("file", imageSelected);
+    formData.append("upload_preset", "umtg5bkl");
+
+    axios.post(
+      "https://api.cloudinary.com/v1_1/dtn3ozivr/image/upload",
+      formData
+    ).then((response) => {
+      console.log(response);
+    });
+  };
+
+  // const handlePhoto = (e) => {
+  //   setFormData({ ...formData, photos: e.target.files });
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    setAuthToken();
+    axios
+      .post("http://localhost:4000/cars", formData, {
+        header: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => {
+        setFormData(initialState);
+        addCar(res.data);
+        navigate("/cars", { replace: true });
+      });
+  };
 
   return (
     <div className="NewCar">
       <div className="NewForm col-6 offset-3 p-2">
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit}>
           <h1 className="text-center mb-3">Create a new listing.</h1>
           <div className="mb-3 text-center">
             <input
@@ -115,7 +130,7 @@ const handleSubmit = (e) => {
             name="location"
           >
             {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-              <div>
+              <div className="form-control mb-3">
                 <label htmlFor="location">Location </label>
                 <input {...getInputProps()} />
                 <div>
@@ -157,7 +172,7 @@ const handleSubmit = (e) => {
             <label className="visually-hidden" htmlFor="specificSizeSelect">
               Preference
             </label>
-           
+
             <select
               id="transmission"
               name="transmission"
@@ -190,7 +205,7 @@ const handleSubmit = (e) => {
               onChange={handleChange}
             ></textarea>
             <label htmlFor="floatingTextarea">
-              Tell us more about your car:
+              Tell us more about your car...
             </label>
           </div>
           <div className="mb-3 text-center">
@@ -200,19 +215,26 @@ const handleSubmit = (e) => {
               type="file"
               accept=".png, .jpg, .jpeg"
               className="form-control"
-              onChange={handlePhoto}
+              // onChange={handlePhoto}
+              onChange={(event) => {
+                setImageSelected(event.target.files);
+              }}
             />
           </div>
 
           <div className="col-auto mb-3">
-            <button type="submit" value="Post Car" className="btn btn-primary">
+            <button
+              type="submit"
+              value="Post Car"
+              className="btn btn-primary"
+              onClick={uploadImage}
+            >
               Submit
             </button>
           </div>
         </form>
       </div>
     </div>
-    
   );
 };
 
