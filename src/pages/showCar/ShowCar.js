@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+
 import Review from "../../components/Review";
 import CarMap from "../../components/CarMap";
 import "./showCar.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import axios from "axios";
 import { getUserFromPayload } from '../../utils/tokenServices'
 // import { setToken } from '../utils/tokenServices'
 
@@ -20,6 +22,9 @@ const ShowCar = ({ cars }) => {
   // console.log(user);
 
   const [currentImg, setCurrentImg] = useState(0);
+ 
+  // const navigate = useNavigate()
+ 
 
   let length = car.image.length;
 
@@ -29,6 +34,18 @@ const ShowCar = ({ cars }) => {
   const prevImg = () => {
     setCurrentImg(currentImg === 0 ? length - 1 : currentImg - 1);
   };
+
+  const updateCarState = (id) => {
+   car.filter(c => c._id !== id)
+  }
+  const deleteCar = (id) => {
+    axios.delete(`http://localhost:4000/cars/${id}`)
+      .then(res => {
+        console.log(res)
+        updateCarState(id)
+        // navigate('/cars')
+    })
+  }
 
   return (
     <div>
@@ -102,17 +119,23 @@ const ShowCar = ({ cars }) => {
                 <li>Title: {car.title}</li>
                 <li>Color: {car.color}</li>
                 <hr />
-                <button className="btn btn-sm btn-outline-secondary">
-                  Save to Favorite
-                </button>
+                
                 {
                   car.owner === user.id &&
                   <Link to={`/cars/${car._id}/edit`} className="btn btn-sm btn-outline-secondary">
                     Edit
                   </Link>
-                  
-
                 }
+                {
+                  car.owner === user.id &&
+                  <Link to={'/cars'}>
+                    <button className="btn btn-sm btn-outline-secondary"
+                      onClick={() => deleteCar(car._id)}>
+                      Delete
+                    </button>
+                  </Link>
+                }  
+                
               </ul>
             </div>
           </div>
