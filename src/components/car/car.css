@@ -1,20 +1,10 @@
-/* .slider{
-    position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-/* .image{
-    width: 100px;
-    height: 200ps;
-    border-radius: 10px;
-} */
+.carousel{
+    position: relative;   
+}
 
 .right-arrow{
     position: absolute;
-    top: 30%;
+    top: 40%;
     right: 5px;
     font-size: 3rem;
     color: black;
@@ -25,7 +15,7 @@
 
 .left-arrow{
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 5px;
     font-size: 3rem;
     color: black;
@@ -34,4 +24,15 @@
     user-select: none;
 }
 
+.slide {
+    opacity: 0;
+    transition-duration: 1s ease;
+    overflow: hidden;
+  }
+  
+  .slide.active {
+    opacity:1;
+    transition-duration: 1s;
+    transform: 0.3s;
+  }
 

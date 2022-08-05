@@ -8,16 +8,10 @@ import Navbar from './components/Navbar'
 import Auth from './pages/AuthPage/Auth';
 
 
-
 function App() {
 
   const [ cars, setCars  ] = useState([])
   const [user, setUser] = useState()
-
-  
- 
-  
-  console.log(cars)
 
   const addCar = (car) => {
     setCars([...cars, car])
@@ -29,11 +23,12 @@ function App() {
       <Routes>
         <Route path='/cars' element = { <Home cars={cars} setCars={setCars} />} />
         <Route path="/cars/new" element={ <NewCar addCar={addCar} />} />
-        <Route path='/cars/:id' element={ <ShowCar cars={cars} />} />
+        <Route path='/cars/:id' element={ <ShowCar cars={cars} user={user} />} />
         <Route path='/login' element={<Auth setUser={setUser} page="login"/>}/>
         <Route path='/signup' element={<Auth setUser={setUser} page="signup"/>}/>
         <Route path="*" element={<Home cars={cars} setCars={setCars}/>} />
        
+
       </Routes>
       
     </div>

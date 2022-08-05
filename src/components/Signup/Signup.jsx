@@ -32,7 +32,6 @@ const Signup = ({setUser}) => {
                 console.log(res.data)
                 setErrorMsg(res.data)
             }
-
         })
     }
 
