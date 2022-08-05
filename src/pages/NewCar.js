@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 import setAuthToken from "../utils/axios";
 import { getToken } from "../utils/tokenServices";
 import PlacesAutocomplete from "react-places-autocomplete";
 
-const NewCar = ({ addCar }) => {
-  const [address, setAddress] = useState("");
-
-  const handleInput = (value) => {
-    setAddress(value);
-  };
-
-  const handleSelect = (value) => {
-    setAddress(value);
-  };
+const NewCar = ({ addCar ,setCars, edit}) => {
 
   const initialState = {
     price: "",
@@ -27,16 +18,35 @@ const NewCar = ({ addCar }) => {
     ownerInfo: "",
     photo: "",
   };
+  const [address, setAddress] = useState("");
+  const [formData, setFormData] = useState(initialState)
+  let { id } = useParams()
+
+  const handleInput = (value) => {
+    setAddress(value);
+  };
+
+  const handleSelect = (value) => {
+    setAddress(value);
+  };
+
 
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!getToken()) navigate("/login");
+    if(edit){
+      axios.get(`http://localhost:4000/cars/${id}`)
+      .then(res =>{
+        setFormData(res.data)
+        setAddress(res.data.address)
+
+      })
+    }
   }, []);
 
 
-const [formData, setFormData] = useState(initialState)
   
 const handleChange = (e) => {
         console.log(e.target)
@@ -50,23 +60,40 @@ const handlePhoto = (e) => {
   
 
 const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(formData)
-        setAuthToken()
-        axios.post('http://localhost:4000/cars', formData, {header: {'Content-Type' : 'multipart/form-data'}} )
-        .then(res =>  {
-            setFormData(initialState)
-            addCar(res.data)
-            navigate('/cars', { replace: true })
-        })
+    e.preventDefault()
+    console.log(formData)
+    setAuthToken()
+    axios.post('http://localhost:4000/cars', formData, {header: {'Content-Type' : 'multipart/form-data'}} )
+    .then(res =>  {
+        setFormData(initialState)
+        addCar(res.data)
+        navigate('/cars', { replace: true })
+    })
 }
+
+const handlePutSubmit = (e) =>{
+    e.preventDefault()
+    setAuthToken()
+    axios.put(`http://localhost:4000/cars/${id}`, formData )
+    .then(res =>  {
+        setFormData(initialState)
+        setCars(res.data)
+        navigate(`/cars/${id}`, { replace: true })
+    })
+
+}
+
 
 
   return (
     <div className="NewCar">
       <div className="NewForm col-6 offset-3 p-2">
-        <form onSubmit={handleSubmit} >
-          <h1 className="text-center mb-3">Create a new listing.</h1>
+        <form onSubmit={edit ? handlePutSubmit : handleSubmit} >
+          {
+            
+            edit ? <h1 className="text-center mb-3">Edit Car</h1>
+            : <h1 className="text-center mb-3">Create a new listing.</h1>
+          }
           <div className="mb-3 text-center">
             <input
               id="make"
@@ -75,6 +102,7 @@ const handleSubmit = (e) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.make}
             />
           </div>
           <div className="mb-3 text-center">
@@ -85,6 +113,7 @@ const handleSubmit = (e) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.model}
             />
           </div>
           <div className="mb-3 text-center">
@@ -95,6 +124,7 @@ const handleSubmit = (e) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.price}
             />
           </div>
           <div className="mb-3 text-center">
@@ -105,6 +135,7 @@ const handleSubmit = (e) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.title}
             />
           </div>
           <PlacesAutocomplete
@@ -141,6 +172,7 @@ const handleSubmit = (e) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.year}
             />
           </div>
           <div className="mb-3 text-center">
@@ -151,6 +183,7 @@ const handleSubmit = (e) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.mileage}
             />
           </div>
           <div className="mb-3 text-center">
@@ -167,8 +200,19 @@ const handleSubmit = (e) => {
               onChange={handleChange}
             >
               <option defaultValue>Select Transmission...</option>
-              <option value="1">Automatic</option>
-              <option value="2">Manual</option>
+              {
+                formData.transmission === 'automatic' ?
+                <>
+                  <option value="automatic" selected>Automatic</option>
+                  <option value="manual" >Manual</option>
+                </>
+                :
+                <>
+                  <option value="automatic" >Automatic</option>
+                  <option value="manual" selected>Manual</option>
+                </>
+
+              }
             </select>
           </div>
           <div className="mb-3 text-center">
@@ -179,6 +223,8 @@ const handleSubmit = (e) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.color}
+              
             />
           </div>
           <div className="form-floating mb-3 text-center">
@@ -188,12 +234,15 @@ const handleSubmit = (e) => {
               type="text"
               className="form-control"
               onChange={handleChange}
+              value={formData?.notes}
             ></textarea>
             <label htmlFor="floatingTextarea">
               Tell us more about your car:
             </label>
           </div>
-          <div className="mb-3 text-center">
+          {
+            !edit &&
+            <div className="mb-3 text-center">
             <input
               id="photo"
               name="photo"
@@ -203,6 +252,8 @@ const handleSubmit = (e) => {
               onChange={handlePhoto}
             />
           </div>
+          }
+          
 
           <div className="col-auto mb-3">
             <button type="submit" value="Post Car" className="btn btn-primary">

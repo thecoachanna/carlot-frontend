@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Review from "../../components/Review";
 import CarMap from "../../components/CarMap";
 import "./showCar.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { getUserFromPayload } from '../../utils/tokenServices'
 // import { setToken } from '../utils/tokenServices'
-// import { getUserFromPayload } from '../utils/tokenServices'
 
-const ShowCar = ({ cars, user }) => {
+const ShowCar = ({ cars }) => {
   let { id } = useParams();
+  const user =getUserFromPayload() 
 
   let car = cars.find((c) => c._id === id);
   console.log(car);
@@ -104,6 +105,14 @@ const ShowCar = ({ cars, user }) => {
                 <button className="btn btn-sm btn-outline-secondary">
                   Save to Favorite
                 </button>
+                {
+                  car.owner === user.id &&
+                  <Link to={`/cars/${car._id}/edit`} className="btn btn-sm btn-outline-secondary">
+                    Edit
+                  </Link>
+                  
+
+                }
               </ul>
             </div>
           </div>
