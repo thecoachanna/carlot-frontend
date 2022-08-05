@@ -102,8 +102,8 @@ const handleChange = (e) => {
 }
     
 const handlePhoto = (e) => {
-    setFormData({ ...formData, photo: e.target.files[0] })
-    console.log(formData.photo)
+    setFormData({ ...formData, photos: e.target.files })
+   
 }
   
 
@@ -111,7 +111,7 @@ const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
         setAuthToken()
-        axios.post('http://localhost:4000/cars', formData )
+        axios.post('http://localhost:4000/cars', formData, {header: {'Content-Type' : 'multipart/form-data'}} )
         .then(res =>  {
             setFormData(initialState)
             addCar(res.data)
@@ -123,7 +123,7 @@ const handleSubmit = (e) => {
   return (
     <body className="NewCar">
       <div className="NewForm col-6 offset-3 p-2">
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form onSubmit={handleSubmit} >
           <h1 className="text-center mb-3">Create a new listing.</h1>
           <div className="mb-3 text-center">
             <input
