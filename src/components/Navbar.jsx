@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link,useNavigate } from 'react-router-dom'
 import { setToken } from '../utils/tokenServices'
 import { getUserFromPayload } from '../utils/tokenServices'
+import SearchBar from './searchBar/SearchBar'
 
 
 const NavbarContainer = styled.nav`
@@ -20,7 +21,7 @@ const NavbarContainer = styled.nav`
     
 `
 
-const Navbar = ({ setUser}) => {
+const Navbar = ({ setUser, setCars}) => {
     const navigate = useNavigate()
     const user = getUserFromPayload()
 
@@ -31,6 +32,8 @@ const Navbar = ({ setUser}) => {
         navigate('/login')
 
     }
+
+    
 
   return (
    /*  <NavbarContainer>
@@ -71,6 +74,11 @@ const Navbar = ({ setUser}) => {
           <a className="nav-link active" aria-current="page" href="/cars">Home</a>
         </li>
 
+         
+        <li className="nav-item">
+          <a className="nav-link" href="/cars/new">New Listing</a>
+        </li>
+
         {
           user ? 
           <li className="nav-item">
@@ -88,14 +96,11 @@ const Navbar = ({ setUser}) => {
           
         }
    
-        
-        <li className="nav-item">
-          <a className="nav-link" href="/cars/new">New Listing</a>
-        </li>
+       
         
     
 
-        <li className="nav-item dropdown">
+       {/*  <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown link
           </a>
@@ -106,9 +111,10 @@ const Navbar = ({ setUser}) => {
            
             
           </ul>
-        </li>
+        </li> */}
       </ul>
-     
+      {/* <SearchBar setCars={setCars}/> */}
+
     </div>
   </div>
 </nav>
