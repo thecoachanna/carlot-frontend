@@ -28,61 +28,7 @@ const NewCar = ({ addCar }) => {
     photo: "",
   };
 
-  // const navigate = useNavigate();
-
-  // const [formData, setFormData] = useState(initialState);
-
-  // const handleChange = (e) => {
-  //   console.log(e.target);
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.id]: e.target.value,
-  //     location: address,
-  //   });
-  // };
-
-  // const handlePhoto = (e) => {
-  //   setFormData({ ...formData, photo: e.target.files[0] });
-  //   console.log(formData.photo);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(formData);
-  //   axios.post("http://localhost:4000/cars", formData).then((res) => {
-  //     setFormData(initialState);
-  //     addCar(res.data);
-  //     navigate("/cars", { replace: true });
-  //   });
-  // };
-
-  // return (
-
-  // const NewCar = ({ addCar }) => {
-
-  //   const [address, setAddress] = useState("");
-
-  //   const handleInput = (value) => {
-  //     setAddress(value);
-  //   };
-
-  //   const handleSelect = (value) => {
-  //     setAddress(value);
-  //   };
-
-  //   const initialState = {
-  //     make: "",
-  //     model: "",
-  //     price: "",
-  //     title: "",
-  //     location: "",
-  //     mileage: "",
-  //     transmission: "",
-  //     color: "",
-  //     notes: "",
-  //     ownerInfo: "",
-  //     photo: "",
-  //   };
+ 
 
   const navigate = useNavigate();
 
@@ -90,33 +36,37 @@ const NewCar = ({ addCar }) => {
     if (!getToken()) navigate("/login");
   }, []);
 
-  const [formData, setFormData] = useState(initialState);
 
-  const handleChange = (e) => {
-    console.log(e.target);
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
+const [formData, setFormData] = useState(initialState)
+  
+const handleChange = (e) => {
+        console.log(e.target)
+        setFormData({...formData, [e.target.id] : e.target.value})
+}
+    
+const handlePhoto = (e) => {
+    setFormData({ ...formData, photos: e.target.files })
+   
+}
+  
 
-  const handlePhoto = (e) => {
-    setFormData({ ...formData, photo: e.target.files[0] });
-    console.log(formData.photo);
-  };
+const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(formData)
+        setAuthToken()
+        axios.post('http://localhost:4000/cars', formData, {header: {'Content-Type' : 'multipart/form-data'}} )
+        .then(res =>  {
+            setFormData(initialState)
+            addCar(res.data)
+            navigate('/cars', { replace: true })
+        })
+}
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    setAuthToken();
-    axios.post("http://localhost:4000/cars", formData).then((res) => {
-      setFormData(initialState);
-      addCar(res.data);
-      navigate("/cars", { replace: true });
-    });
-  };
 
   return (
     <div className="NewCar">
       <div className="NewForm col-6 offset-3 p-2">
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form onSubmit={handleSubmit} >
           <h1 className="text-center mb-3">Create a new listing.</h1>
           <div className="mb-3 text-center">
             <input
@@ -208,18 +158,7 @@ const NewCar = ({ addCar }) => {
             <label className="visually-hidden" htmlFor="specificSizeSelect">
               Preference
             </label>
-            {/* <select
-              id="transmission"
-              name="transmission"
-              placeholder="Transmission"
-              type="text"
-              className="form-select"
-              onChange={handleChange}
-            >
-              <option selected>Select Transmission...</option>
-              <option value="1">Automatic</option>
-              <option value="2">Manual</option>
-            </select> */}
+           
             <select
               id="transmission"
               name="transmission"
