@@ -21,7 +21,7 @@ const NavbarContainer = styled.nav`
     
 `
 
-const Navbar = ({ setUser, setCars}) => {
+const Navbar = ({ setUser, setCars,searchQuery,setSearchQuery}) => {
     const navigate = useNavigate()
     const user = getUserFromPayload()
 
@@ -36,28 +36,12 @@ const Navbar = ({ setUser, setCars}) => {
     
 
   return (
-   /*  <NavbarContainer>
-        <ul>
-            { user && <li><span>Welcome {getName()}</span></li> }
-            <li> <Link to='/cars'> Home </Link></li>
-            <li> <Link to='/cars/new'> New Listing</Link></li>
-            <li><Link to='/Welcome'></Link></li>
-
-    
-            {
-                user ?  
-                <li><a href='#' onClick={logout}>Logout</a></li> 
-                : 
-                <li> <Link to='/login'>Login</Link></li>
-            }
-        </ul>
-    </NavbarContainer>
- */
+   
     <nav className="navbar navbar-expand-lg bg-light">
   <div className="container-fluid">
-    <a className="navbar-brand" href="/">
+    <Link className="navbar-brand" to="/">
         <img src="https://png.clipart.me/image_preview/2eb/sport-car-27559.png" alt="" width="120" height="72" className="d-inline-block align-text-top"></img>
-    </a> 
+    </Link> 
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -71,12 +55,12 @@ const Navbar = ({ setUser, setCars}) => {
           </li>
         } 
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/cars">Home</a>
+          <Link className="nav-link active" aria-current="page" to="/cars">Home</Link>
         </li>
 
          
         <li className="nav-item">
-          <a className="nav-link" href="/cars/new">New Listing</a>
+          <Link className="nav-link" to="/cars/new">New Listing</Link>
         </li>
 
         {
@@ -87,33 +71,21 @@ const Navbar = ({ setUser, setCars}) => {
           :
           <>
             <li className="nav-item">
-              <a className="nav-link" href="/login">Login</a>
+              <Link className="nav-link" to="/login">Login</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/Signup">Signup</a>
+              <Link className="nav-link" to="/Signup">Signup</Link>
             </li>
           </>
           
         }
    
-       
-        
-    
 
-       {/*  <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Action</a></li>
-            <li><a className="dropdown-item" href="#">Another action</a></li>
-            <li><a className="dropdown-item" href="#">Something else here</a></li>
-           
-            
-          </ul>
-        </li> */}
       </ul>
-      {/* <SearchBar setCars={setCars}/> */}
+      {
+        user && <SearchBar setCars={setCars} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+
+      }
 
     </div>
   </div>
