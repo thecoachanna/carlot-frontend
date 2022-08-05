@@ -24,10 +24,6 @@ const Navbar = ({ setUser}) => {
     const navigate = useNavigate()
     const user = getUserFromPayload()
 
-    function getName(){
-        return user.email.split('@')[0]
-    }
-
     console.log(user)
 
     function logout(){
@@ -63,25 +59,41 @@ const Navbar = ({ setUser}) => {
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul className="navbar-nav"> 
+      <ul className="navbar-nav">
+
+      { user 
+        &&
+          <li className="nav-item">
+            <a className="nav-link" aria-current="page">Welcome {user.name}</a>
+          </li>
+        } 
         <li className="nav-item">
           <a className="nav-link active" aria-current="page" href="/cars">Home</a>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/Signup">Signup</a>
-        </li>
-        {/* add lines 41-52  */}
-      <li className="nav-item">
-          <a className="nav-link" href="/login">Login</a>
-        </li>
+
+        {
+          user ? 
+          <li className="nav-item">
+            <a className="nav-link" href='#' onClick={logout}>Logout</a>
+          </li>
+          :
+          <>
+            <li className="nav-item">
+              <a className="nav-link" href="/login">Login</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/Signup">Signup</a>
+            </li>
+          </>
+          
+        }
+   
+        
         <li className="nav-item">
           <a className="nav-link" href="/cars/new">New Listing</a>
         </li>
         
     
-        <li className="nav-item">
-            <a className="nav-link" href='#' onClick={logout}>Logout</a>
-        </li>
 
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
