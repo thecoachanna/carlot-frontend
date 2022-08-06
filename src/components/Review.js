@@ -52,6 +52,7 @@ const Review = ({ ownerId }) => {
             name="review"
             className="form-control"
             onChange={handleChange}
+            value={formData?.text}
           ></textarea>
         </div>
         <input

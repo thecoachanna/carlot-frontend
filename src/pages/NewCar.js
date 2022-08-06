@@ -43,7 +43,7 @@ const NewCar = ({ addCar ,setCars, edit}) => {
       axios.get(`http://localhost:4000/cars/${id}`)
       .then(res =>{
         setFormData(res.data)
-        setAddress(res.data.address)
+        setAddress(res.data.location)
 
       })
     }
@@ -61,10 +61,11 @@ const NewCar = ({ addCar ,setCars, edit}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newData = {...formData,location:address}
     console.log(formData);
     setAuthToken();
     axios
-      .post("http://localhost:4000/cars", formData, {
+      .post("http://localhost:4000/cars", newData, {
         header: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -77,8 +78,9 @@ const NewCar = ({ addCar ,setCars, edit}) => {
 
 const handlePutSubmit = (e) =>{
     e.preventDefault()
+    const newData = {...formData,location:address}
     setAuthToken()
-    axios.put(`http://localhost:4000/cars/${id}`, formData )
+    axios.put(`http://localhost:4000/cars/${id}`, newData )
     .then(res =>  {
         setFormData(initialState)
         setCars(res.data)
@@ -141,8 +143,7 @@ const handlePutSubmit = (e) =>{
             />
           </div>
 
-          {
-            !edit &&
+          
             <PlacesAutocomplete
             value={address}
             onChange={handleInput}
@@ -170,7 +171,7 @@ const handlePutSubmit = (e) =>{
               </div>
             )}
           </PlacesAutocomplete>
-          }
+          
           
           <div className="mb-3 text-center">
             <input

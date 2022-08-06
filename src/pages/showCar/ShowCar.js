@@ -121,26 +121,26 @@ const ShowCar = ({ cars, addCar }) => {
                 <li>Transmission: {car.transmission}</li>
                 <li>Title: {car.title}</li>
                 <li>Color: {car.color}</li>
-                <hr />
-
-                {car.owner === user._id && (
-                  <Link
-                    to={`/cars/${car._id}/edit`}
-                    className="btn btn-sm btn-outline-secondary"
-                  >
-                    Edit
-                  </Link>
-                )}
-                {car.owner === user._id && (
-                  <Link to={"/cars"}>
-                    <button
-                      className="btn btn-sm btn-outline-secondary"
-                      onClick={() => deleteCar(car._id)}
-                    >
-                      Delete
-                    </button>
-                  </Link>
-                )}
+                
+                {
+                  
+                  car.owner === user.id &&
+                  <>
+                  <hr />
+                    <Link to={`/cars/${car._id}/edit`} className="btn btn-sm btn-outline-secondary">
+                      Edit
+                    </Link>
+                
+                    <Link to={'/cars'}>
+                      <button className="btn btn-sm btn-outline-secondary"
+                        onClick={() => deleteCar(car._id)}>
+                        Delete
+                      </button>
+                    </Link>
+                    </>
+                
+                }  
+                
               </ul>
             </div>
           </div>
