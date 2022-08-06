@@ -1,6 +1,6 @@
 import React from 'react'
 // import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { setToken } from '../utils/tokenServices'
 import { getUserFromPayload } from '../utils/tokenServices'
 import SearchBar from './searchBar/SearchBar'
