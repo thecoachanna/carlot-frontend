@@ -4,20 +4,19 @@ import Review from "../../components/Review";
 import CarMap from "../../components/CarMap";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
-import { getUserFromPayload } from '../../utils/tokenServices'
+import { getUserFromPayload } from "../../utils/tokenServices";
 import "./showCar.css";
 // import { setToken } from '../utils/tokenServices'
 
 const ShowCar = ({ cars, addCar }) => {
   let { id } = useParams();
-  const user =getUserFromPayload() 
+  const user = getUserFromPayload();
 
   let car = cars.find((c) => c._id === id) || {};
 
   const [currentImg, setCurrentImg] = useState(0);
- 
-  // const navigate = useNavigate()
 
+  // const navigate = useNavigate()
 
   let length = car.image?.length;
 
@@ -29,41 +28,46 @@ const ShowCar = ({ cars, addCar }) => {
   };
 
   const updateCarState = (id) => {
-   car.filter(c => c._id !== id)
-  }
+    car.filter((c) => c._id !== id);
+  };
   const deleteCar = (id) => {
-    axios.delete(`http://localhost:4000/cars/${id}`)
-      .then(res => {
-        console.log(res)
-        updateCarState(id)
-        
-    })
-  }
+    axios.delete(`http://localhost:4000/cars/${id}`).then((res) => {
+      console.log(res);
+      updateCarState(id);
+    });
+  };
 
   useEffect(() => {
     if (!car._id) {
-      axios.get(`http://localhost:4000/cars/${id}`)
-        .then(res => {
-          addCar(res.data)
-          console.log(res)
-      })
- }
-  }, [car])
-  console.log(car)
+      axios.get(`http://localhost:4000/cars/${id}`).then((res) => {
+        addCar(res.data);
+        console.log(res);
+      });
+    }
+  }, [car]);
+  console.log(car);
 
   return (
     <div>
-      <a href="/cars" style={{color:"black", marginLeft:"1rem"}}>Back</a>
+      <a href="/cars" style={{ color: "black", marginLeft: "1rem" }}>
+        Back
+      </a>
       <div className="container text-center">
         <div className="row g-2">
           <div className="col-6">
             <div className="p-3 border bg-light">
-
               <section className="carousel">
-           
-                <IoIosArrowBack className="left-arrow" style={length>1 ?{ opacity:"1" } : {opacity:"0"}} onClick={prevImg} />
-                <IoIosArrowForward className="right-arrow" style={length>1 ?{ opacity:"1" } : {opacity:"0"}} onClick={nextImg} />
-              
+                <IoIosArrowBack
+                  className="left-arrow"
+                  style={length > 1 ? { opacity: "1" } : { opacity: "0" }}
+                  onClick={prevImg}
+                />
+                <IoIosArrowForward
+                  className="right-arrow"
+                  style={length > 1 ? { opacity: "1" } : { opacity: "0" }}
+                  onClick={nextImg}
+                />
+
                 {car.image?.map((img, index) => {
                   return (
                     <div
@@ -71,7 +75,7 @@ const ShowCar = ({ cars, addCar }) => {
                         index === currentImg ? "slide active" : "slide"
                       }
                       key={index}
-                      >
+                    >
                       {index === currentImg && (
                         <img src={img} className="img-thumbnail" alt={img} />
                       )}
@@ -79,7 +83,14 @@ const ShowCar = ({ cars, addCar }) => {
                   );
                 })}
               </section>
-              <div className="col-6" style={length === 1 ? {display: "none"}: { width: "inherit", display: "block"}}>
+              <div
+                className="col-6"
+                style={
+                  length === 1
+                    ? { display: "none" }
+                    : { width: "inherit", display: "block" }
+                }
+              >
                 {car.image?.map((img, index) => {
                   return (
                     <img
@@ -111,23 +122,25 @@ const ShowCar = ({ cars, addCar }) => {
                 <li>Title: {car.title}</li>
                 <li>Color: {car.color}</li>
                 <hr />
-                
-                {
-                  car.owner === user.id &&
-                  <Link to={`/cars/${car._id}/edit`} className="btn btn-sm btn-outline-secondary">
+
+                {car.owner === user._id && (
+                  <Link
+                    to={`/cars/${car._id}/edit`}
+                    className="btn btn-sm btn-outline-secondary"
+                  >
                     Edit
                   </Link>
-                }
-                {
-                  car.owner === user.id &&
-                  <Link to={'/cars'}>
-                    <button className="btn btn-sm btn-outline-secondary"
-                      onClick={() => deleteCar(car._id)}>
+                )}
+                {car.owner === user._id && (
+                  <Link to={"/cars"}>
+                    <button
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={() => deleteCar(car._id)}
+                    >
                       Delete
                     </button>
                   </Link>
-                }  
-                
+                )}
               </ul>
             </div>
           </div>
@@ -163,7 +176,7 @@ const ShowCar = ({ cars, addCar }) => {
         </div>
       </div>
       <div>
-      <Review  ownerId = {car.owner}/>
+        <Review ownerId={car.owner} />
       </div>
     </div>
   );
