@@ -31,3 +31,13 @@ As a user, I'd like to be able to save favorites
 # Models 
 
 <img width="1099" alt="Screen Shot 2022-07-16 at 4 32 07 PM" src="https://media.git.generalassemb.ly/user/42509/files/e9abba7d-5894-414f-92a0-7a360e10562a">
+
+# Contributers
+
+Anne Nettles -Scrum Leader
+
+Masi Nakhjir
+
+Sasha Sabov
+
+JoeAvery Ruiz
