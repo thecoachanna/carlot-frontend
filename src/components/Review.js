@@ -6,10 +6,9 @@ import setAuthToken from "../utils/axios";
 const Review = ({ ownerId }) => {
   useEffect(() => {
     setAuthToken();
-    axios
-      .get(`http://localhost:4000/users/${ownerId}/reviews`)
+    axios.get(`http://localhost:4000/users/${ownerId}/reviews`)
       // console.log(res.data)
-      .then((res) => {
+      .then(res => {
         setReviews(res.data);
       });
   }, []);
@@ -34,9 +33,8 @@ const Review = ({ ownerId }) => {
     e.preventDefault();
     console.log(formData);
     setAuthToken();
-    axios
-      .post(`http://localhost:4000/users/${ownerId}/reviews`, formData)
-      .then((res) => {
+    axios.post(`http://localhost:4000/users/${ownerId}/reviews`, formData)
+      .then(res => {
         setFormData(initialState);
         addReview(res.data.text);
       });
@@ -65,7 +63,7 @@ const Review = ({ ownerId }) => {
       </form>
 
       {reviews.length === 0
-        ? "No Reviews for this Seller"
+        ? <p style={{ marginLeft: "15%" }}>No Reviews for this Seller</p>
         : reviews.map((review) => {
             return (
               <figure
