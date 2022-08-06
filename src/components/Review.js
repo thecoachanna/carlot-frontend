@@ -65,7 +65,7 @@ const Review = ({ ownerId }) => {
       </form>
 
       {reviews.length === 0
-        ? "No Reviews for this Seller"
+        ? <p style={{ marginLeft: "15%" }}>No Reviews for this Seller</p>
         : reviews.map((review) => {
             return (
               <figure
