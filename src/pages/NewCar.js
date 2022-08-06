@@ -52,7 +52,7 @@ const NewCar = ({ addCar ,setCars, edit}) => {
 
   const handleChange = (e) => {
     console.log(e.target);
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    setFormData({ ...formData, [e.target.id]: e.target.value, location: address });
   };
 
   const handlePhoto = (e) => {
