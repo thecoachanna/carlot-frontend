@@ -30,7 +30,7 @@ function App() {
         <Route path='/cars' element = { <Home getSearchQuery={getSearchQuery} cars={cars} setCars={setCars} />} />
         <Route path="/cars/new" element={ <NewCar addCar={addCar} setCars={setCars} edit={false} />} />
         <Route path="/cars/:id/edit" element={ <NewCar addCar={addCar} setCars={setCars} edit={true}/>} />
-        <Route path='/cars/:id' element={ <ShowCar cars={cars} user={user} />} />
+        <Route path='/cars/:id' element={<ShowCar addCar={addCar} cars={cars} user={user} />} />
         <Route path='/login' element={<Auth setUser={setUser} page="login"/>}/>
         <Route path='/signup' element={<Auth setUser={setUser} page="signup"/>}/>
         <Route path="*" element={<Home cars={cars} getSearchQuery={getSearchQuery} setCars={setCars}/>} />

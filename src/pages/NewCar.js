@@ -55,24 +55,9 @@ const NewCar = ({ addCar ,setCars, edit}) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const [imageSelected, setImageSelected] = useState("");
-
-  const uploadImage = () => {
-    const formData = new FormData();
-    formData.append("file", imageSelected);
-    formData.append("upload_preset", "umtg5bkl");
-
-    axios.post(
-      "https://api.cloudinary.com/v1_1/dtn3ozivr/image/upload",
-      formData
-    ).then((response) => {
-      console.log(response);
-    });
+  const handlePhoto = (e) => {
+    setFormData({ ...formData, photos: e.target.files });
   };
-
-  // const handlePhoto = (e) => {
-  //   setFormData({ ...formData, photos: e.target.files });
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -263,10 +248,8 @@ const handlePutSubmit = (e) =>{
               type="file"
               accept=".png, .jpg, .jpeg"
               className="form-control"
-              // onChange={handlePhoto}
-              onChange={(event) => {
-                setImageSelected(event.target.files);
-              }}
+              onChange={handlePhoto}
+              
             />
           </div>
           }
@@ -277,7 +260,7 @@ const handlePutSubmit = (e) =>{
               type="submit"
               value="Post Car"
               className="btn btn-primary"
-              onClick={uploadImage}
+              
             >
               Submit
             </button>
