@@ -7,7 +7,7 @@ const Car = ({ car }) => {
 
   const [currentImg, setCurrentImg] = useState(0);
 
-  let length = car.image.length;
+  let length = car.image?.length;
 
   const nextImg = () => {
     setCurrentImg(currentImg === length - 1 ? 0 : currentImg + 1);
@@ -23,7 +23,7 @@ const Car = ({ car }) => {
           <section className="carousel">
             < IoIosArrowBack className="left-arrow" style={length>1 ?{ opacity:"1" } : {opacity:"0"}} onClick={prevImg}/>
             <IoIosArrowForward className="right-arrow" style={length>1 ?{ opacity:"1" } : {opacity:"0"}} onClick={nextImg} />
-            {car.image.map((img, index) => {
+            {car.image?.map((img, index) => {
               return (
                 <div 
                 className={index === currentImg ? 'slide active' : 'slide'}

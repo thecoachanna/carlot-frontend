@@ -1,26 +1,25 @@
-import React, { useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import Review from "../../components/Review";
 import CarMap from "../../components/CarMap";
-import "./showCar.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
 import { getUserFromPayload } from '../../utils/tokenServices'
+import "./showCar.css";
 // import { setToken } from '../utils/tokenServices'
 
-const ShowCar = ({ cars }) => {
+const ShowCar = ({ cars, addCar }) => {
   let { id } = useParams();
   const user =getUserFromPayload() 
 
-  let car = cars.find((c) => c._id === id);
+  let car = cars.find((c) => c._id === id) || {};
 
   const [currentImg, setCurrentImg] = useState(0);
  
   // const navigate = useNavigate()
- 
 
-  let length = car.image.length;
+
+  let length = car.image?.length;
 
   const nextImg = () => {
     setCurrentImg(currentImg === length - 1 ? 0 : currentImg + 1);
@@ -37,9 +36,20 @@ const ShowCar = ({ cars }) => {
       .then(res => {
         console.log(res)
         updateCarState(id)
-        // navigate('/cars')
+        
     })
   }
+
+  useEffect(() => {
+    if (!car._id) {
+      axios.get(`http://localhost:4000/cars/${id}`)
+        .then(res => {
+          addCar(res.data)
+          console.log(res)
+      })
+ }
+  }, [car])
+  console.log(car)
 
   return (
     <div>
@@ -54,7 +64,7 @@ const ShowCar = ({ cars }) => {
                 <IoIosArrowBack className="left-arrow" style={length>1 ?{ opacity:"1" } : {opacity:"0"}} onClick={prevImg} />
                 <IoIosArrowForward className="right-arrow" style={length>1 ?{ opacity:"1" } : {opacity:"0"}} onClick={nextImg} />
               
-                {car.image.map((img, index) => {
+                {car.image?.map((img, index) => {
                   return (
                     <div
                       className={
@@ -70,7 +80,7 @@ const ShowCar = ({ cars }) => {
                 })}
               </section>
               <div className="col-6" style={length === 1 ? {display: "none"}: { width: "inherit", display: "block"}}>
-                {car.image.map((img, index) => {
+                {car.image?.map((img, index) => {
                   return (
                     <img
                       src={img}
